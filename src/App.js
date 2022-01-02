@@ -31,9 +31,18 @@ function App() {
   const [deadCardSelection, updateDeadCardSelection] = useState(chars[0].name)
   const [deadCardCount, updateDeadCardCount] = useState(1)
   const [deadCards, updateDeadCards] = useState([])
+  const [showChars, updateShowChars] = useState(false)
 
   return (
     <Container>
+      <div className="jumbotron">
+        <h1 className="display-6">SBB shop simulator</h1>
+        <p className="lead">
+          This is a little tool to simulate rolling a shop in storybook brawl.
+          There are a number of assumptions about how the shop works which may
+          not be accurate.
+        </p>
+      </div>
       <Row>
         <Col>
           <Card color="light">
@@ -221,7 +230,8 @@ function App() {
               <CardTitle tag={'h5'}>Probability of hitting tag</CardTitle>
               <CardSubtitle className="mb-2 text-muted" tag="h6">
                 Uses brute force to calculate probability of finding at least
-                one card with the given tag
+                one card with the given tag. Tags are currently not complete,
+                you can see below the current state of data entry.
               </CardSubtitle>
               <Label for="iterations2">Iterations:</Label>
               <Input
@@ -279,6 +289,18 @@ function App() {
                   </li>
                 ))}
               </ul>
+            </CardBody>
+          </Card>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Card>
+            <CardBody>
+              <Button onClick={() => updateShowChars(!showChars)}>
+                {showChars ? 'Hide' : 'Show'} Character Details
+              </Button>
+              <pre>{showChars && JSON.stringify(chars, null, 2)}</pre>
             </CardBody>
           </Card>
         </Col>
