@@ -149,7 +149,7 @@ const transformedChars = chars.reduce(
   (acc, { name, ...char }) => ({ ...acc, [name]: char }),
   {},
 )
-console.log(chars.length)
+// console.log(chars.length)
 
 export function drawHand({ handSize, level = 2, deadCards = [] }) {
   const leftCards = deadCards.reduce(
@@ -194,12 +194,12 @@ export const findCards = (cards) =>
 // const findFrogs = findCard('lonely prince')
 // console.log(findFrogs({ handSize: 4, level: 3 }))
 // console.log(findFrogs({ handSize: 3 }))
-console.log(
-  findCard('cinderella')({
-    handSize: 3,
-    deadCards: [{ name: 'cinderella', count: 3 }],
-  }),
-)
+// console.log(
+//   findCard('cinderella')({
+//     handSize: 3,
+//     deadCards: [{ name: 'cinderella', count: 3 }],
+//   }),
+// )
 // console.log(findFrogs(4))
 // console.log(findCard('cinderella')(3))
 
