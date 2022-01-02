@@ -1,5 +1,5 @@
 // import './App.css';
-import { drawHand, findCards, chars } from './shop'
+import { drawHand, findCards, chars, tags, findTag } from './shop'
 import { useState } from 'react'
 import {
   Button,
@@ -7,6 +7,7 @@ import {
   Card,
   CardBody,
   CardTitle,
+  CardSubtitle,
   Col,
   Container,
   Input,
@@ -26,6 +27,7 @@ function App() {
   const [prob, updateProb] = useState(0)
   const [iterations, updateIterations] = useState(1000)
   const [targetCards, updateTargetCards] = useState([])
+  const [targetTag, updateTargetTag] = useState()
   const [deadCardSelection, updateDeadCardSelection] = useState(chars[0].name)
   const [deadCardCount, updateDeadCardCount] = useState(1)
   const [deadCards, updateDeadCards] = useState([])
@@ -75,6 +77,10 @@ function App() {
           <Card>
             <CardBody>
               <CardTitle tag="h5">Dead Cards</CardTitle>
+              <CardSubtitle className="mb-2 text-muted" tag="h6">
+                Remove cards from the pool (quester support currently limited,
+                it assumes these are your cards)
+              </CardSubtitle>
               <Input
                 type="select"
                 onChange={(e) => updateDeadCardSelection(e.target.value)}
@@ -121,7 +127,7 @@ function App() {
                           ])
                         }
                       >
-                        Remove
+                        Put Back
                       </Button>
                     </Card>
                   </Col>
@@ -132,10 +138,10 @@ function App() {
         </Col>
       </Row>
       <Row>
-        <Col>
+        <Col lg={12}>
           <Card>
             <CardBody>
-              <CardTitle tag="h5">Draw Simulator</CardTitle>
+              <CardTitle tag="h5">Draw Simulator</CardTitle>{' '}
               <Button
                 color="primary"
                 onMouseUp={() =>
@@ -152,55 +158,129 @@ function App() {
             </CardBody>
           </Card>
         </Col>
-        <Col>
-          <p>
-            iterations:{' '}
-            <input
-              type="number"
-              defaultValue={iterations}
-              onChange={(e) => updateIterations(e.target.value)}
-            ></input>
-          </p>
-          <p>
-            targets: <br />
-            <select
-              multiple
-              onChange={(e) =>
-                updateTargetCards(
-                  Object.values(e.target)
-                    .filter(({ selected }) => selected)
-                    .map(({ value }) => value),
-                )
-              }
-            >
-              {chars.map((char) => (
-                <option value={char.name} key={char.name}>
-                  {char.name}
-                </option>
-              ))}
-            </select>
-            <br />
-            {targetCards.toString()}
-          </p>
-          <button
-            onMouseUp={() => {
-              updateProb(
-                findCards(targetCards)({
-                  handSize,
-                  level,
-                  iterations,
-                  deadCards,
-                }),
-              )
-            }}
-          >
-            find cards
-          </button>
-          {[1, 2, 3, 4, 5].map((n) => (
-            <p key={n}>
-              {n} roll{n > 1 && 's'}: {(100 * calcProb(prob, n)).toFixed(2)}%
-            </p>
-          ))}
+        <Col lg={6}>
+          <Card>
+            <CardBody>
+              <CardTitle tag={'h5'}>
+                Probability of hitting target cards
+              </CardTitle>
+              <CardSubtitle className="mb-2 text-muted" tag="h6">
+                Uses brute force to calculate probability of finding at least
+                one of the selected cards, increasing iterations will improve
+                accuracy but can hang your browser
+              </CardSubtitle>
+              <Label for="iterations">Iterations:</Label>
+              <Input
+                id="iterations"
+                type="number"
+                value={iterations}
+                onChange={(e) => updateIterations(e.target.value)}
+              ></Input>
+              <Label for="targets">Desired Card(s):</Label>
+              <Input
+                id="targets"
+                type="select"
+                multiple
+                onChange={(e) => {
+                  updateProb(0)
+                  updateTargetCards(
+                    Object.values(e.target)
+                      .filter(({ selected }) => selected)
+                      .map(({ value }) => value),
+                  )
+                }}
+              >
+                {chars.map((char) => (
+                  <option value={char.name} key={char.name}>
+                    {char.name}
+                  </option>
+                ))}
+              </Input>
+              <p>{targetCards.toString()}</p>
+              <Button
+                color="primary"
+                onMouseUp={() => {
+                  updateProb(
+                    findCards(targetCards)({
+                      handSize,
+                      level,
+                      iterations,
+                      deadCards,
+                    }),
+                  )
+                }}
+              >
+                find cards
+              </Button>
+            </CardBody>
+          </Card>
+        </Col>
+        <Col lg={6}>
+          <Card>
+            <CardBody>
+              <CardTitle tag={'h5'}>Probability of hitting tag</CardTitle>
+              <CardSubtitle className="mb-2 text-muted" tag="h6">
+                Uses brute force to calculate probability of finding at least
+                one card with the given tag
+              </CardSubtitle>
+              <Label for="iterations2">Iterations:</Label>
+              <Input
+                id="iterations2"
+                type="number"
+                value={iterations}
+                onChange={(e) => updateIterations(e.target.value)}
+              ></Input>
+              <Label for="tag">Desired Tag:</Label>
+              <Input
+                id="tag"
+                type="select"
+                onChange={(e) => {
+                  updateProb(0)
+                  updateTargetTag(e.target.value)
+                }}
+              >
+                {tags.map((tag) => (
+                  <option value={tag} key={tag}>
+                    {tag}
+                  </option>
+                ))}
+              </Input>
+              <p>{targetTag}</p>
+              <Button
+                color="primary"
+                onMouseUp={() => {
+                  updateProb(
+                    findTag(targetTag)({
+                      handSize,
+                      level,
+                      iterations,
+                      deadCards,
+                    }),
+                  )
+                }}
+              >
+                find cards
+              </Button>
+            </CardBody>
+          </Card>
+        </Col>
+        <Col lg={12}>
+          <Card>
+            <CardBody>
+              <CardTitle tag={'h5'}>The Odds</CardTitle>
+              <CardSubtitle className="mb-2 text-muted" tag="h6">
+                Never tell me the odds
+              </CardSubtitle>
+              <ul>
+                {[1, 2, 3, 4, 5].map((n) => (
+                  <li key={n}>
+                    {n} roll{n > 1 && 's'}:{' '}
+                    {(100 * calcProb(prob, n)).toFixed(2)}%
+                  </li>
+                ))}
+              </ul>
+            </CardBody>
+          </Card>
         </Col>
       </Row>
     </Container>

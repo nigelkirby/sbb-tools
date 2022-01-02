@@ -145,6 +145,11 @@ export const chars = [
   { name: 'three big pigs', level: 6, count: 10, tags: [] },
 ]
 
+export const tags = chars.reduce(
+  (acc, char) => [...new Set([...acc, ...char.tags])],
+  [],
+)
+
 const transformedChars = chars.reduce(
   (acc, { name, ...char }) => ({ ...acc, [name]: char }),
   {},
@@ -203,8 +208,8 @@ export const findCards = (cards) =>
 // console.log(findFrogs(4))
 // console.log(findCard('cinderella')(3))
 
-// const findTag = (tag) =>
-//   findSomething((hand) => hand.find((card) => card.tags.includes(tag)))
+export const findTag = (tag) =>
+  findSomething((hand) => hand.find((card) => card.tags.includes(tag)))
 
 // const findGood = findTag('good')
 // console.log(findGood(3))
