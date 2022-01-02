@@ -38,9 +38,9 @@ function App() {
       <div className="jumbotron">
         <h1 className="display-6">SBB shop simulator</h1>
         <p className="lead">
-          This is a little tool to simulate rolling a shop in storybook brawl.
-          There are a number of assumptions about how the shop works which may
-          not be accurate.
+          This is a little tool to simulate rolling a shop in storybook brawl
+          and calculate certain odds. There are a number of assumptions about
+          how the shop works which may not be accurate.
         </p>
       </div>
       <Row>
@@ -175,8 +175,8 @@ function App() {
               </CardTitle>
               <CardSubtitle className="mb-2 text-muted" tag="h6">
                 Uses brute force to calculate probability of finding at least
-                one of the selected cards, increasing iterations will improve
-                accuracy but can hang your browser
+                one of the selected card or cards, increasing iterations will
+                improve accuracy but can hang your browser
               </CardSubtitle>
               <Label for="iterations">Iterations:</Label>
               <Input
@@ -219,7 +219,7 @@ function App() {
                   )
                 }}
               >
-                find cards
+                Run
               </Button>
             </CardBody>
           </Card>
@@ -230,8 +230,10 @@ function App() {
               <CardTitle tag={'h5'}>Probability of hitting tag</CardTitle>
               <CardSubtitle className="mb-2 text-muted" tag="h6">
                 Uses brute force to calculate probability of finding at least
-                one card with the given tag. Tags are currently not complete,
-                you can see below the current state of data entry.
+                one card with the given tag.{' '}
+                <em>Tags are not at all complete</em>, you can see below the
+                current state of data entry by clicking the 'Show Character
+                Details' button
               </CardSubtitle>
               <Label for="iterations2">Iterations:</Label>
               <Input
@@ -269,7 +271,7 @@ function App() {
                   )
                 }}
               >
-                find cards
+                Run
               </Button>
             </CardBody>
           </Card>
