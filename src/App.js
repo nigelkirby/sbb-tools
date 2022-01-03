@@ -21,6 +21,8 @@ function calcProb(prob, n) {
   return 1 - Math.pow(1 - prob, n)
 }
 
+let g
+
 function App() {
   const [level, updateLevel] = useState(2)
   const [handSize, updateHandSize] = useState(3)
@@ -216,7 +218,7 @@ function App() {
                 onMouseUp={() => {
                   updateProgress(0)
                   updateInProgress(true)
-                  const g = findCards(targetCards)({
+                  g = findCards(targetCards)({
                     handSize,
                     level,
                     iterations,
@@ -225,8 +227,11 @@ function App() {
                   ;(function l() {
                     setTimeout(function () {
                       const a = g.next()
-                      updateProb(a.value.prob)
-                      updateProgress(a.value.progress)
+                      if (a.value) {
+                        // if it was cancelled a.value will be undefined so just leave the values as they were
+                        updateProb(a.value.prob)
+                        updateProgress(a.value.progress)
+                      }
                       if (!a.done) l()
                       else updateInProgress(false)
                     }, 10)
@@ -235,6 +240,11 @@ function App() {
               >
                 Run
               </Button>
+              {inProgress && (
+                <Button color="danger" onClick={() => g.return()}>
+                  Cancel
+                </Button>
+              )}
             </CardBody>
           </Card>
         </Col>
@@ -276,7 +286,7 @@ function App() {
                 onMouseUp={() => {
                   updateProgress(0)
                   updateInProgress(true)
-                  const g = findTag(targetTag)({
+                  g = findTag(targetTag)({
                     handSize,
                     level,
                     iterations,
@@ -285,8 +295,11 @@ function App() {
                   ;(function l() {
                     setTimeout(function () {
                       const a = g.next()
-                      updateProb(a.value.prob)
-                      updateProgress(a.value.progress)
+                      if (a.value) {
+                        // if it was cancelled a.value will be undefined so just leave the values as they were
+                        updateProb(a.value.prob)
+                        updateProgress(a.value.progress)
+                      }
                       if (!a.done) l()
                       else updateInProgress(false)
                     }, 10)
@@ -295,6 +308,11 @@ function App() {
               >
                 Run
               </Button>
+              {inProgress && (
+                <Button color="danger" onClick={() => g.return()}>
+                  Cancel
+                </Button>
+              )}
             </CardBody>
           </Card>
         </Col>
