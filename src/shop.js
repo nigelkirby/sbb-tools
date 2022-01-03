@@ -371,15 +371,19 @@ export function drawHand({ handSize, level = 2, deadCards = [] }) {
   return hand
 }
 
-const findSomething =
-  (predicate) =>
-  ({ handSize, level, deadCards, iterations = 10 }) => {
+const findSomething = (predicate) =>
+  function* ({ handSize, level, deadCards, iterations = 10 }) {
     var target = 0
     for (let i = 0; i < iterations; i++) {
       const hand = drawHand({ handSize, level, deadCards })
       target += predicate(hand) ? 1 : 0
+      if ((i + 1) % 1000 === 0)
+        yield {
+          prob: target / (i + 1),
+          progress: Math.floor((100 * i) / iterations),
+        }
     }
-    return target / iterations
+    return { prob: target / iterations, progress: 100 }
   }
 
 export const findCard = (cardName) =>

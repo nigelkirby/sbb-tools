@@ -13,6 +13,7 @@ import {
   Input,
   Label,
   Row,
+  Progress,
 } from 'reactstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -25,9 +26,11 @@ function App() {
   const [handSize, updateHandSize] = useState(3)
   const [hand, updateHand] = useState([])
   const [prob, updateProb] = useState(0)
+  const [progress, updateProgress] = useState(0)
+  const [inProgress, updateInProgress] = useState(false)
   const [iterations, updateIterations] = useState(1000)
   const [targetCards, updateTargetCards] = useState([])
-  const [targetTag, updateTargetTag] = useState()
+  const [targetTag, updateTargetTag] = useState(tags[0])
   const [deadCardSelection, updateDeadCardSelection] = useState(chars[0].name)
   const [deadCardCount, updateDeadCardCount] = useState(1)
   const [deadCards, updateDeadCards] = useState([])
@@ -69,7 +72,7 @@ function App() {
               <ButtonGroup>
                 {[1, 2, 3, 4, 5].map((n) => (
                   <Button
-                    className={n === handSize && 'active'}
+                    className={n === handSize ? 'active' : ''}
                     onClick={() => updateHandSize(n)}
                     key={n}
                   >
@@ -192,6 +195,7 @@ function App() {
                 multiple
                 onChange={(e) => {
                   updateProb(0)
+                  updateProgress(0)
                   updateTargetCards(
                     Object.values(e.target)
                       .filter(({ selected }) => selected)
@@ -208,15 +212,25 @@ function App() {
               <p>{targetCards.toString()}</p>
               <Button
                 color="primary"
+                disabled={inProgress}
                 onMouseUp={() => {
-                  updateProb(
-                    findCards(targetCards)({
-                      handSize,
-                      level,
-                      iterations,
-                      deadCards,
-                    }),
-                  )
+                  updateProgress(0)
+                  updateInProgress(true)
+                  const g = findCards(targetCards)({
+                    handSize,
+                    level,
+                    iterations,
+                    deadCards,
+                  })
+                  ;(function l() {
+                    setTimeout(function () {
+                      const a = g.next()
+                      updateProb(a.value.prob)
+                      updateProgress(a.value.progress)
+                      if (!a.done) l()
+                      else updateInProgress(false)
+                    }, 10)
+                  })()
                 }}
               >
                 Run
@@ -230,10 +244,7 @@ function App() {
               <CardTitle tag={'h5'}>Probability of hitting tag</CardTitle>
               <CardSubtitle className="mb-2 text-muted" tag="h6">
                 Uses brute force to calculate probability of finding at least
-                one card with the given tag.{' '}
-                <em>Tags are not at all complete</em>, you can see below the
-                current state of data entry by clicking the 'Show Character
-                Details' button
+                one card with the given tag.
               </CardSubtitle>
               <Label for="iterations2">Iterations:</Label>
               <Input
@@ -248,6 +259,7 @@ function App() {
                 type="select"
                 onChange={(e) => {
                   updateProb(0)
+                  updateProgress(0)
                   updateTargetTag(e.target.value)
                 }}
               >
@@ -260,15 +272,25 @@ function App() {
               <p>{targetTag}</p>
               <Button
                 color="primary"
+                disabled={inProgress}
                 onMouseUp={() => {
-                  updateProb(
-                    findTag(targetTag)({
-                      handSize,
-                      level,
-                      iterations,
-                      deadCards,
-                    }),
-                  )
+                  updateProgress(0)
+                  updateInProgress(true)
+                  const g = findTag(targetTag)({
+                    handSize,
+                    level,
+                    iterations,
+                    deadCards,
+                  })
+                  ;(function l() {
+                    setTimeout(function () {
+                      const a = g.next()
+                      updateProb(a.value.prob)
+                      updateProgress(a.value.progress)
+                      if (!a.done) l()
+                      else updateInProgress(false)
+                    }, 10)
+                  })()
                 }}
               >
                 Run
@@ -283,6 +305,9 @@ function App() {
               <CardSubtitle className="mb-2 text-muted" tag="h6">
                 Never tell me the odds
               </CardSubtitle>
+              {inProgress && iterations > 10000 && (
+                <Progress animated color="info" value={progress} />
+              )}
               <ul>
                 {[1, 2, 3, 4, 5].map((n) => (
                   <li key={n}>
