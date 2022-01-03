@@ -16,6 +16,10 @@ import {
   Progress,
 } from 'reactstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import ga4 from 'react-ga4'
+
+ga4.initialize('G-3TQRG02P4B')
+ga4.send('pageview')
 
 function calcProb(prob, n) {
   return 1 - Math.pow(1 - prob, n)
