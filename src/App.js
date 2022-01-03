@@ -180,8 +180,7 @@ function App() {
               </CardTitle>
               <CardSubtitle className="mb-2 text-muted" tag="h6">
                 Uses brute force to calculate probability of finding at least
-                one of the selected card or cards, increasing iterations will
-                improve accuracy but can hang your browser
+                one of the selected card or cards.
               </CardSubtitle>
               <Label for="iterations">Iterations:</Label>
               <Input
@@ -316,7 +315,7 @@ function App() {
             </CardBody>
           </Card>
         </Col>
-        <Col lg={12}>
+        <Col lg={6}>
           <Card>
             <CardBody>
               <CardTitle tag={'h5'}>The Odds</CardTitle>
