@@ -335,6 +335,8 @@ export const chars = [
   },
 ]
 
+const animals = chars.filter((char) => char.tags.includes('animal'))
+
 export const tags = chars.reduce(
   (acc, char) => [...new Set([...acc, ...char.tags])],
   [],
@@ -346,7 +348,12 @@ const transformedChars = chars.reduce(
 )
 // console.log(chars.length)
 
-export function drawHand({ handSize, level = 2, deadCards = [] }) {
+export function drawHand({
+  handSize,
+  level = 2,
+  deadCards = [],
+  piper = false,
+}) {
   const leftCards = deadCards.reduce(
     (acc, card) => {
       const d = transformedChars[card.name]
@@ -368,14 +375,17 @@ export function drawHand({ handSize, level = 2, deadCards = [] }) {
     if (card.quest) deck = deck.filter(({ name }) => name !== card.name)
     return card
   })
-  return hand
+  const lvlAnimals = animals.filter((char) => char.level <= level)
+  return !piper
+    ? hand
+    : [...hand, lvlAnimals[Math.floor(Math.random() * lvlAnimals.length)]]
 }
 
 const findSomething = (predicate) =>
-  function* ({ handSize, level, deadCards, iterations = 10 }) {
+  function* ({ handSize, level, deadCards, iterations = 10, piper = false }) {
     var target = 0
     for (let i = 0; i < iterations; i++) {
-      const hand = drawHand({ handSize, level, deadCards })
+      const hand = drawHand({ handSize, level, deadCards, piper })
       target += predicate(hand) ? 1 : 0
       if ((i + 1) % 1000 === 0)
         yield {

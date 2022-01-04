@@ -41,6 +41,7 @@ function App() {
   const [deadCardCount, updateDeadCardCount] = useState(1)
   const [deadCards, updateDeadCards] = useState([])
   const [showChars, updateShowChars] = useState(false)
+  const [piper, updatePiper] = useState(false)
 
   return (
     <Container>
@@ -160,10 +161,18 @@ function App() {
           <Card>
             <CardBody>
               <CardTitle tag="h5">Draw Simulator</CardTitle>{' '}
+              <Input
+                type="checkbox"
+                id="piper"
+                checked={piper}
+                onClick={() => updatePiper(!piper)}
+              />
+              <Label for="piper">Piper Mode</Label>
+              <br />
               <Button
                 color="primary"
                 onMouseUp={() =>
-                  updateHand(drawHand({ level, handSize, deadCards }))
+                  updateHand(drawHand({ level, handSize, deadCards, piper }))
                 }
               >
                 Roll
@@ -226,6 +235,7 @@ function App() {
                     level,
                     iterations,
                     deadCards,
+                    piper,
                   })
                   ;(function l() {
                     setTimeout(function () {
@@ -243,7 +253,7 @@ function App() {
               >
                 Run
               </Button>
-              {inProgress && (
+              {inProgress && iterations > 10000 && (
                 <Button color="danger" onClick={() => g.return()}>
                   Cancel
                 </Button>
@@ -294,6 +304,7 @@ function App() {
                     level,
                     iterations,
                     deadCards,
+                    piper,
                   })
                   ;(function l() {
                     setTimeout(function () {
@@ -311,7 +322,7 @@ function App() {
               >
                 Run
               </Button>
-              {inProgress && (
+              {inProgress && iterations > 10000 && (
                 <Button color="danger" onClick={() => g.return()}>
                   Cancel
                 </Button>
