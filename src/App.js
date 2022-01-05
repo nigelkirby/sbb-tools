@@ -1,5 +1,6 @@
 // import './App.css';
-import { drawHand, findCards, chars, tags, findTag } from './shop'
+import { drawHand, findCards, tags, findTag, drawSpell } from './shop'
+import chars from './chars.json'
 import { useState } from 'react'
 import {
   Button,
@@ -18,8 +19,11 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ga4 from 'react-ga4'
 
-ga4.initialize('G-3TQRG02P4B')
-ga4.send('pageview')
+console.log(process.env.NODE_ENV)
+if (process.env.NODE_ENV !== 'development') {
+  ga4.initialize('G-3TQRG02P4B')
+  ga4.send('pageview')
+}
 
 function calcProb(prob, n) {
   return 1 - Math.pow(1 - prob, n)
@@ -31,6 +35,7 @@ function App() {
   const [level, updateLevel] = useState(2)
   const [handSize, updateHandSize] = useState(3)
   const [hand, updateHand] = useState([])
+  const [spells, updateSpells] = useState([])
   const [prob, updateProb] = useState(0)
   const [progress, updateProgress] = useState(0)
   const [inProgress, updateInProgress] = useState(false)
@@ -172,13 +177,19 @@ function App() {
               <Button
                 color="primary"
                 onMouseUp={() =>
-                  updateHand(drawHand({ level, handSize, deadCards, piper }))
+                  updateHand(drawHand({ level, handSize, deadCards, piper })) ||
+                  updateSpells(drawSpell({ level, count: 1 }))
                 }
               >
                 Roll
               </Button>
               <ul>
                 {hand.map((el, i) => (
+                  <li key={el.name + i}>{el.name}</li>
+                ))}
+              </ul>
+              <ul>
+                {spells.map((el, i) => (
                   <li key={el.name + i}>{el.name}</li>
                 ))}
               </ul>
