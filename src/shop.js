@@ -75,6 +75,15 @@ export const findCard = (cardName) =>
   findSomething((hand) => hand.some((card) => card.name === cardName))
 export const findCards = (cards) =>
   findSomething((hand) => hand.some((card) => cards.includes(card.name)))
+
+export const findCardAndTags = ({ cards, tags }) =>
+  findSomething((hand) =>
+    hand.some(
+      (card) =>
+        cards.includes(card.name) ||
+        tags.some((tag) => card.tags.includes(tag)),
+    ),
+  )
 // const findFrogs = findCard('lonely prince')
 // console.log(findFrogs({ handSize: 4, level: 3 }))
 // console.log(findFrogs({ handSize: 3 }))

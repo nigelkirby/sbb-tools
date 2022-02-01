@@ -20,8 +20,8 @@ function App() {
             <>
               <Nav tabs>
                 <NavLink href="/shop">Shop Simulator</NavLink>
-                <NavLink href="/tourney">Tournament Simulator</NavLink>
               </Nav>
+              <ShopPage />
             </>
           }
         ></Route>
@@ -31,7 +31,7 @@ function App() {
             <>
               <Nav tabs>
                 <NavLink href="/shop">Shop Simulator</NavLink>
-                <NavLink href="/tourney">Tournament Simulator</NavLink>
+                {/* <NavLink href="/tourney">Tournament Simulator</NavLink> */}
               </Nav>
               <ShopPage />
             </>

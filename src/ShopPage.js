@@ -1,5 +1,4 @@
-// import './App.css';
-import { drawHand, findCards, tags, findTag, drawSpell } from './shop'
+import { drawHand, tags, drawSpell, findCardAndTags } from './shop'
 import chars from './chars.json'
 import { useState } from 'react'
 import {
@@ -22,9 +21,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-widgets/styles.css'
 import ga4 from 'react-ga4'
 import { Combobox } from 'react-widgets/cjs'
-import { useHotkeys } from 'react-hotkeys-hook'
 
-console.log(process.env.NODE_ENV)
 if (process.env.NODE_ENV !== 'development') {
   ga4.initialize('G-3TQRG02P4B')
   ga4.send('pageview')
@@ -45,20 +42,15 @@ function App() {
   const [progress, updateProgress] = useState(0)
   const [inProgress, updateInProgress] = useState(false)
   const [iterations, updateIterations] = useState(1000)
-  const [targetCards, updateTargetCards] = useState([])
-  const [targetTag, updateTargetTag] = useState(tags[0])
+  const [targetCard, updateTargetCard] = useState()
+  const [desiredCards, updateDesiredCards] = useState([])
+  const [targetTag, updateTargetTag] = useState('')
+  const [desiredTags, updateDesiredTags] = useState([])
   const [deadCardSelection, updateDeadCardSelection] = useState()
   const [deadCardCount, updateDeadCardCount] = useState(1)
   const [deadCards, updateDeadCards] = useState([])
   const [showChars, updateShowChars] = useState(false)
   const [piper, updatePiper] = useState(false)
-
-  useHotkeys(
-    'r',
-    () =>
-      updateHand(drawHand({ level, handSize, deadCards, piper })) ||
-      updateSpells(drawSpell({ level, count: 1 })),
-  )
 
   return (
     <Container>
@@ -67,7 +59,7 @@ function App() {
         <p className="lead">
           This is a little tool to simulate rolling a shop in storybook brawl
           and calculate certain odds. There are a number of assumptions about
-          how the shop works which may not be accurate. {handSize}
+          how the shop works which may not be accurate.
         </p>
       </div>
       <Row>
@@ -122,7 +114,6 @@ function App() {
                     <Input
                       type="checkbox"
                       id="piperMode"
-                      checked={piper}
                       onClick={() => updatePiper(!piper)}
                     />
                   </Col>
@@ -159,8 +150,8 @@ function App() {
               </CardSubtitle>
               <Combobox
                 value={deadCardSelection}
-                onChange={(e) => {
-                  updateDeadCardSelection(e)
+                onChange={(card) => {
+                  updateDeadCardSelection(card)
                   updateDeadCardCount(1)
                 }}
                 data={chars.map(({ name }) => name)}
@@ -184,7 +175,6 @@ function App() {
                   min={1}
                   max={15}
                   value={deadCardCount}
-                  defaultValue={deadCardCount}
                   onChange={(e) => updateDeadCardCount(e.target.value)}
                 ></Input>
                 <Button
@@ -205,7 +195,7 @@ function App() {
                 </Button>
               </Form>
               <Col>
-                <ul className="list-group list-group-flush">
+                <ul className="list-group">
                   {deadCards.map((card, i) => (
                     <li className="list-group-item">
                       {card.name} {card.count}
@@ -255,111 +245,113 @@ function App() {
         <Col lg={6}>
           <Card>
             <CardBody>
-              <CardTitle tag={'h5'}>
-                Probability of hitting target cards
-              </CardTitle>
+              <CardTitle tag={'h5'}>Probability Analysis</CardTitle>
               <CardSubtitle className="mb-2 text-muted" tag="h6">
-                Uses brute force to calculate probability of finding at least
-                one of the selected card or cards.
+                Add desired cards and tags, run to calculate the probability
+                that the shop contains at least one matching card
               </CardSubtitle>
-              <Label for="targets">Desired Card(s):</Label>
-              <Input
-                id="targets"
-                type="select"
-                multiple
-                onChange={(e) => {
-                  updateProb(0)
-                  updateProgress(0)
-                  updateTargetCards(
-                    Object.values(e.target)
-                      .filter(({ selected }) => selected)
-                      .map(({ value }) => value),
-                  )
-                }}
-              >
-                {chars.map((char) => (
-                  <option value={char.name} key={char.name}>
-                    {char.name}
-                  </option>
-                ))}
-              </Input>
-              <p>{targetCards.toString()}</p>
-              <Button
-                color="primary"
-                disabled={inProgress}
-                onClick={() => {
-                  updateProgress(0)
-                  updateInProgress(true)
-                  g = findCards(targetCards)({
-                    handSize,
-                    level,
-                    iterations,
-                    deadCards,
-                    piper,
-                  })
-                  ;(function l() {
-                    setTimeout(function () {
-                      const a = g.next()
-                      if (a.value) {
-                        // if it was cancelled a.value will be undefined so just leave the values as they were
-                        updateProb(a.value.prob)
-                        updateProgress(a.value.progress)
+              <Form>
+                <FormGroup row>
+                  <Label for="tag" sm={3}>
+                    Desired Card:
+                  </Label>
+                  <Col sm={7}>
+                    <Combobox
+                      data={chars.map(({ name }) => name)}
+                      onChange={(card) => updateTargetCard(card)}
+                    ></Combobox>
+                  </Col>
+                  <Col sm={2}>
+                    <Button
+                      onClick={() =>
+                        chars.find((char) => char.name === targetCard) &&
+                        updateDesiredCards([
+                          ...desiredCards.filter((card) => card !== targetCard),
+                          targetCard,
+                        ])
                       }
-                      if (!a.done) l()
-                      else updateInProgress(false)
-                    }, 10)
-                  })()
-                }}
-              >
-                Run
-              </Button>
-              {inProgress && iterations > 10000 && (
-                <Button color="danger" onClick={() => g.return()}>
-                  Cancel
-                </Button>
-              )}
-            </CardBody>
-          </Card>
-        </Col>
-        <Col lg={6}>
-          <Card>
-            <CardBody>
-              <CardTitle tag={'h5'}>Probability of hitting tag</CardTitle>
-              <CardSubtitle className="mb-2 text-muted" tag="h6">
-                Uses brute force to calculate probability of finding at least
-                one card with the given tag.
-              </CardSubtitle>
-              <Label for="iterations2">Iterations:</Label>
-              <Input
-                id="iterations2"
-                type="number"
-                value={iterations}
-                onChange={(e) => updateIterations(e.target.value)}
-              ></Input>
-              <Label for="tag">Desired Tag:</Label>
-              <Input
-                id="tag"
-                type="select"
-                onChange={(e) => {
-                  updateProb(0)
-                  updateProgress(0)
-                  updateTargetTag(e.target.value)
-                }}
-              >
-                {tags.map((tag) => (
-                  <option value={tag} key={tag}>
-                    {tag}
-                  </option>
-                ))}
-              </Input>
-              <p>{targetTag}</p>
+                    >
+                      Add
+                    </Button>
+                  </Col>
+                </FormGroup>
+                <FormGroup row>
+                  <Label for="tag" sm={3}>
+                    Desired Tag:
+                  </Label>
+                  <Col sm={7}>
+                    <Combobox
+                      onChange={(tag) => {
+                        updateTargetTag(tag)
+                      }}
+                      data={tags}
+                      id="tag"
+                    />
+                  </Col>
+                  <Col sm={2}>
+                    <Button
+                      onClick={() =>
+                        tags.find((tag) => tag === targetTag) &&
+                        updateDesiredTags([
+                          ...desiredTags.filter((tag) => tag !== targetTag),
+                          targetTag,
+                        ])
+                      }
+                    >
+                      Add
+                    </Button>
+                  </Col>
+                </FormGroup>
+              </Form>
+
+              <Col>
+                <ul className="list-group">
+                  {desiredTags.map((tag, i) => (
+                    <li className="list-group-item">
+                      {tag}
+                      <Button
+                        style={{ float: 'right' }}
+                        onClick={() =>
+                          updateDesiredTags([
+                            ...desiredTags.slice(0, i),
+                            ...desiredTags.slice(i + 1),
+                          ])
+                        }
+                        close
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </Col>
+              <Col>
+                <ul className="list-group">
+                  {desiredCards.map((card, i) => (
+                    <li className="list-group-item">
+                      {card}
+                      <Button
+                        style={{ float: 'right' }}
+                        onClick={() =>
+                          updateDesiredCards([
+                            ...desiredCards.slice(0, i),
+                            ...desiredCards.slice(i + 1),
+                          ])
+                        }
+                        close
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </Col>
               <Button
                 color="primary"
                 disabled={inProgress}
                 onClick={() => {
                   updateProgress(0)
                   updateInProgress(true)
-                  g = findTag(targetTag)({
+                  g = findCardAndTags({
+                    tags: desiredTags,
+                    cards: desiredCards,
+                  })({
                     handSize,
                     level,
                     iterations,

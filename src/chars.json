@@ -1,434 +1,445 @@
 [
   {
-    "name": "lonely prince",
-    "level": 2,
-    "count": 15,
-    "tags": ["good", "prince"]
-  },
-  {
-    "name": "sherwood sureshot",
-    "level": 2,
-    "count": 15,
-    "tags": ["good", "princess", "ranged"]
-  },
-  {
-    "name": "cinderella",
-    "level": 2,
-    "count": 15,
-    "quest": true,
-    "tags": ["princess", "mage"]
-  },
-  {
-    "name": "billy gruff",
+    "name": "B-a-a-d Billy Gruff",
     "level": 2,
     "count": 15,
     "tags": ["evil", "animal"]
   },
   {
-    "name": "baby dragon",
+    "name": "Baby Dragon",
     "level": 2,
     "count": 15,
     "tags": ["dragon", "flying"]
   },
   {
-    "name": "baby root",
+    "name": "Baby Root",
     "level": 2,
     "count": 15,
     "tags": ["good", "treant", "support"]
   },
   {
-    "name": "black cat",
+    "name": "Black Cat",
     "level": 2,
     "count": 15,
     "tags": ["evil", "animal", "last breath"]
   },
-  { "name": "blind mouse", "level": 2, "count": 15, "tags": ["animal"] },
-  { "name": "crafty", "level": 2, "count": 15, "tags": ["dwarf"] },
-  { "name": "fanny", "level": 2, "count": 15, "tags": ["dwarf", "support"] },
-  { "name": "golden chicken", "level": 2, "count": 15, "tags": ["animal"] },
+  { "name": "Blind Mouse", "level": 2, "count": 15, "tags": ["animal"] },
+  {
+    "name": "Cinder-Ella",
+    "level": 2,
+    "count": 15,
+    "quest": true,
+    "tags": ["princess", "mage"]
+  },
+  { "name": "Crafty", "level": 2, "count": 15, "tags": ["dwarf"] },
+  { "name": "Fanny", "level": 2, "count": 15, "tags": ["dwarf", "support"] },
+  { "name": "Golden Chicken", "level": 2, "count": 15, "tags": ["animal"] },
   {
     "name": "happy little tree",
     "level": 2,
     "count": 15,
     "tags": ["good", "treant"]
   },
-  { "name": "humpty dumpty", "level": 2, "count": 15, "tags": ["good", "egg"] },
+  { "name": "Humpty Dumpty", "level": 2, "count": 15, "tags": ["good", "egg"] },
   {
-    "name": "kitty cutpurse",
+    "name": "Kitty Cutpurse",
     "level": 2,
     "count": 15,
     "tags": ["evil", "animal", "slay"]
   },
   {
-    "name": "labryinth minotaur",
+    "name": "Labryinth Minotaur",
     "level": 2,
     "count": 15,
     "tags": ["evil", "monster"]
   },
   {
-    "name": "mad mim",
+    "name": "Lonely Prince",
+    "level": 2,
+    "count": 15,
+    "tags": ["good", "prince"]
+  },
+  {
+    "name": "Mad Mim",
     "level": 2,
     "count": 15,
     "tags": ["evil", "mage", "support"]
   },
   {
-    "name": "polywoggle",
+    "name": "Polywoggle",
     "level": 2,
     "count": 15,
     "tags": ["animal", "slay"]
   },
   {
-    "name": "rainbow unicorn",
+    "name": "Rainbow Unicorn",
     "level": 2,
     "count": 15,
     "tags": ["good", "animal"]
   },
   {
-    "name": "tiny",
+    "name": "Sherwood Sureshot",
+    "level": 2,
+    "count": 15,
+    "tags": ["good", "princess", "ranged"]
+  },
+  {
+    "name": "Tiny",
     "level": 2,
     "count": 15,
     "tags": ["dwarf"]
   },
   {
-    "name": "wizard's familiar",
+    "name": "Wizard's Familiar",
     "level": 2,
     "count": 15,
     "tags": ["animal", "mage"]
   },
   {
-    "name": "brave princess",
+    "name": "Brave Princess",
     "level": 3,
     "count": 15,
     "quest": true,
     "tags": ["good", "princess", "slay"]
   },
   {
-    "name": "darkwood creeper",
+    "name": "Darkwood Creeper",
     "level": 3,
     "count": 15,
     "tags": ["evil", "treant"]
   },
-  { "name": "dubly", "level": 3, "count": 15, "tags": ["dwarf"] },
+  { "name": "Dubly", "level": 3, "count": 15, "tags": ["dwarf"] },
   {
-    "name": "good witch",
+    "name": "Good Witch of the North",
     "level": 3,
     "count": 15,
     "tags": ["good", "support", "mage"]
   },
   {
-    "name": "lucky",
+    "name": "Lucky",
     "level": 3,
     "count": 15,
     "tags": ["dwarf", "last breath"]
   },
   {
-    "name": "ogre princess",
+    "name": "Ogre Princess",
     "level": 3,
     "count": 15,
     "tags": ["monster", "good", "princess", "slay"]
   },
   {
-    "name": "princess peep",
+    "name": "Princess Peep",
     "level": 3,
     "count": 15,
     "tags": ["last breath", "princess", "good"]
   },
   {
-    "name": "princess wight",
+    "name": "Princess Wight",
     "level": 3,
     "count": 15,
     "quest": true,
     "tags": ["evil", "princess"]
   },
   {
-    "name": "prized pig",
+    "name": "Prized Pig",
     "level": 3,
     "count": 15,
     "tags": ["animal", "last breath"]
   },
   {
-    "name": "queen of hearts",
+    "name": "Queen of Hearts",
     "level": 3,
     "count": 15,
     "tags": ["evil", "queen"]
   },
   {
-    "name": "romeo",
+    "name": "Romeo",
     "level": 3,
     "count": 15,
     "tags": ["good", "prince", "last breath"]
   },
   {
-    "name": "shadow assassin",
+    "name": "Shadow Assassin",
     "level": 3,
     "count": 15,
     "tags": ["evil", "monster", "ranged"]
   },
   {
-    "name": "sleeping princess",
+    "name": "Sleeping Princess",
     "level": 3,
     "count": 15,
     "tags": ["good", "princess"]
   },
   {
-    "name": "spell weaver",
+    "name": "Spell Weaver",
     "level": 3,
     "count": 15,
     "tags": ["evil", "mage", "ranged"]
   },
   {
-    "name": "the white stag",
+    "name": "The White Stag",
     "level": 3,
     "count": 15,
     "tags": ["good", "animal"]
   },
   {
-    "name": "trojan donkey",
+    "name": "Trojan Donkey",
     "level": 3,
     "count": 15,
     "tags": ["good", "animal"]
   },
   {
-    "name": "vain-pire",
+    "name": "Vain-Pire",
     "level": 3,
     "count": 15,
     "tags": ["evil", "monster", "slay"]
   },
   {
-    "name": "wicked witch",
+    "name": "Wicked Witch of the West",
     "level": 3,
     "count": 15,
     "tags": ["evil", "support", "mage"]
   },
   {
-    "name": "wretched mummy",
+    "name": "Wretched Mummy",
     "level": 3,
     "count": 15,
     "tags": ["evil", "monster", "last breath"]
   },
   {
-    "name": "bearded vulture",
+    "name": "Bearded Vulture",
     "level": 4,
     "count": 15,
     "tags": ["evil", "animal"]
   },
-  { "name": "copycat", "level": 4, "count": 15, "tags": ["animal"] },
+  { "name": "Copycat", "level": 4, "count": 15, "tags": ["animal"] },
   {
-    "name": "court wizard",
+    "name": "Court Wizard",
     "level": 4,
     "count": 15,
     "tags": ["mage", "good", "ranged"]
   },
   {
-    "name": "fairy godmother",
+    "name": "Fairy Godmother",
     "level": 4,
     "count": 15,
     "tags": ["good", "fairy"]
   },
   {
-    "name": "friendly spirit",
+    "name": "Friendly Spirit",
     "level": 4,
     "count": 15,
     "tags": ["good", "monster", "last breath"]
   },
-  { "name": "greedy", "level": 4, "count": 15, "tags": ["dwarf"] },
+  { "name": "Greedy", "level": 4, "count": 15, "tags": ["dwarf"] },
   {
-    "name": "grim soul",
+    "name": "Grim Soul",
     "level": 4,
     "count": 15,
     "tags": ["monster", "last breath"]
   },
   {
-    "name": "heartwood elder",
+    "name": "Heartwood Elder",
     "level": 4,
     "count": 15,
     "tags": ["good", "treant", "support"]
   },
   {
-    "name": "hungry hungry hippocampus",
+    "name": "Hungry Hungry Hippocampus",
     "level": 4,
     "count": 15,
     "tags": ["good", "animal"]
   },
-  { "name": "juliet", "level": 4, "count": 15, "tags": ["good", "princess"] },
+  { "name": "Juliet", "level": 4, "count": 15, "tags": ["good", "princess"] },
   {
-    "name": "lady of the lake",
+    "name": "Lady of the Lake",
     "level": 4,
     "count": 15,
     "tags": ["good", "mage", "support", "ranged"]
   },
   {
-    "name": "lightning dragon",
+    "name": "Lightning Dragon",
     "level": 4,
     "count": 15,
     "tags": ["dragon", "flying"]
   },
-  { "name": "medusa", "level": 4, "count": 15, "tags": ["evil", "monster"] },
+  { "name": "Medusa", "level": 4, "count": 15, "tags": ["evil", "monster"] },
   {
-    "name": "monster book",
+    "name": "Monster Book",
     "level": 4,
     "count": 15,
     "tags": ["evil", "monster", "last breath"]
   },
   {
-    "name": "prince arthur",
+    "name": "Prince Arthur",
     "level": 4,
     "count": 15,
     "tags": ["good", "prince"]
   },
   {
-    "name": "puff puff",
+    "name": "Puff Puff",
     "level": 4,
     "count": 15,
     "tags": ["good", "puff puff", "last breath"]
   },
   {
-    "name": "riverwish mermaid",
+    "name": "Riverwish Mermaid",
     "level": 4,
     "count": 15,
     "tags": ["good", "princess", "support"]
   },
   {
-    "name": "sheep in wolf's clothing",
+    "name": "Sheep in Wolf's Clothing",
     "level": 4,
     "count": 15,
     "tags": ["evil", "animal", "last breath"]
   },
   {
-    "name": "soltak ancient",
+    "name": "Soltak Ancient",
     "level": 4,
     "count": 15,
     "tags": ["good", "treant"]
   },
   {
-    "name": "sporko",
+    "name": "Sporko",
     "level": 4,
     "count": 15,
     "tags": ["evil", "mage", "support", "ranged"]
   },
   {
-    "name": "the chupacabra",
+    "name": "The Chupacabra",
     "level": 4,
     "count": 15,
     "tags": ["evil", "monster", "slay"]
   },
   {
-    "name": "the nutcracker",
+    "name": "The Nutcracker",
     "level": 4,
     "count": 15,
     "quest": true,
     "tags": ["good", "prince", "treant"]
   },
   {
-    "name": "tweedle dee",
+    "name": "Tweedle Dee",
     "level": 4,
     "count": 15,
     "tags": ["dwarf", "last breath"]
   },
-  { "name": "angry", "level": 5, "count": 15, "tags": ["dwarf"] },
-  { "name": "aon", "level": 5, "count": 15, "tags": ["evil", "mage", "slay"] },
+  { "name": "Angry", "level": 5, "count": 15, "tags": ["dwarf"] },
+  { "name": "Aon", "level": 5, "count": 15, "tags": ["evil", "mage", "slay"] },
   {
-    "name": "baba yaga",
+    "name": "Baba Yaga",
     "level": 5,
     "count": 15,
     "tags": ["evil", "monster", "support"]
   },
   {
-    "name": "baby bear",
+    "name": "Baby Bear",
     "level": 5,
     "count": 15,
     "tags": ["good", "animal", "last breath"]
   },
   {
-    "name": "cupid",
+    "name": "Bossy",
+    "level": 5,
+    "count": 15,
+    "tags": ["dwarf"]
+  },
+  {
+    "name": "Cupid",
     "level": 5,
     "count": 15,
     "tags": ["good", "fairy", "flying", "ranged"]
   },
   {
-    "name": "lancelot",
+    "name": "Great Pumpkin King",
+    "level": 5,
+    "count": 15,
+    "tags": ["evil", "monster", "last breath"]
+  },
+  {
+    "name": "Lancelot",
     "level": 5,
     "count": 15,
     "quest": true,
     "tags": ["good", "prince", "slay"]
   },
-  { "name": "nian", "level": 5, "count": 15, "tags": ["evil", "monster"] },
   {
-    "name": "rotten applewood",
+    "name": "Nian, Sea Terror",
+    "level": 5,
+    "count": 15,
+    "tags": ["evil", "monster"]
+  },
+  {
+    "name": "Rotten Appletree",
     "level": 5,
     "count": 15,
     "tags": ["evil", "treant"]
   },
-  { "name": "shoulder faeries", "level": 5, "count": 15, "tags": ["fairy"] },
+  { "name": "Shoulder Faeries", "level": 5, "count": 15, "tags": ["fairy"] },
   {
-    "name": "southern siren",
+    "name": "Southern Siren",
     "level": 5,
     "count": 15,
     "tags": ["evil", "monster", "slay"]
   },
   {
-    "name": "wombats in disguise",
+    "name": "Wombats in Disguise",
     "level": 5,
     "count": 15,
     "tags": ["animal", "last breath"]
   },
   {
-    "name": "ashwood elm",
+    "name": "Ashwood Elm",
     "level": 6,
     "count": 10,
     "tags": ["evil", "treant"]
   },
-  { "name": "bearstein", "level": 6, "count": 10, "tags": ["good", "animal"] },
-  { "name": "doombreath", "level": 6, "count": 10, "tags": ["evil", "dragon"] },
-  { "name": "echowood", "level": 6, "count": 10, "tags": ["treant"] },
+  { "name": "Bearstein", "level": 6, "count": 10, "tags": ["good", "animal"] },
+  { "name": "Doombreath", "level": 6, "count": 10, "tags": ["evil", "dragon"] },
+  { "name": "Echowood", "level": 6, "count": 10, "tags": ["treant"] },
   {
-    "name": "good boy",
+    "name": "Good Boy",
     "level": 6,
     "count": 10,
     "tags": ["good", "animal", "last breath"]
   },
   {
-    "name": "great pumpkin king",
-    "level": 6,
-    "count": 10,
-    "tags": ["evil", "monster", "last breath"]
-  },
-  {
-    "name": "grumblegore",
+    "name": "Grumblegore",
     "level": 6,
     "count": 10,
     "tags": ["evil", "monster", "support", "ranged"]
   },
   {
-    "name": "hercules",
+    "name": "Hercules",
     "level": 6,
     "count": 10,
     "quest": true,
     "tags": ["good", "prince"]
   },
   {
-    "name": "jormungand",
+    "name": "Jormungand",
     "level": 6,
     "count": 10,
     "tags": ["monster", "slay"]
   },
-  { "name": "lordy", "level": 6, "count": 10, "tags": ["dwarf"] },
-  { "name": "oni king", "level": 6, "count": 10, "tags": ["evil", "monster"] },
+  { "name": "Lordy", "level": 6, "count": 10, "tags": ["dwarf"] },
+  { "name": "Oni King", "level": 6, "count": 10, "tags": ["evil", "monster"] },
   {
-    "name": "robinwood",
+    "name": "Robinwood",
     "level": 6,
     "count": 10,
     "tags": ["good", "treant", "ranged"]
   },
   {
-    "name": "the green knight",
+    "name": "The Green Knight",
     "level": 6,
     "count": 10,
     "tags": ["good", "treant", "support"]
   },
-  { "name": "the storm king", "level": 6, "count": 10, "tags": ["mage"] },
+  { "name": "The Storm King", "level": 6, "count": 10, "tags": ["mage"] },
   {
-    "name": "three big pigs",
+    "name": "Three Big Pigs",
     "level": 6,
     "count": 10,
     "tags": ["evil", "animal", "last breath"]
