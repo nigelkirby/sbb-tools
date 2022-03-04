@@ -320,12 +320,21 @@
     "tags": ["good", "prince", "treant"]
   },
   {
-    "name": "Tweedle Dee",
+    "name": "Gingerbread Kinght",
     "level": 4,
+    "count": 15,
+    "quest": true,
+    "tags": ["good", "prince"]
+  },
+  {
+    "name": "Tweedle Dee",
+    "level": 5,
     "count": 15,
     "tags": ["dwarf", "last breath"]
   },
-  { "name": "Angry", "level": 5, "count": 15, "tags": ["dwarf"] },
+  { "name": "Burning Tree", "level": 5, "count": 15, "tags": ["treant", "evil"] },
+  { "name": "Time Flies", "level": 5, "count": 15, "tags": ["animal"] },
+  { "name": "Feasting Dragon", "level": 5, "count": 15, "tags": ["dragon", "slay"] },
   { "name": "Aon", "level": 5, "count": 15, "tags": ["evil", "mage", "slay"] },
   {
     "name": "Baba Yaga",
@@ -418,7 +427,7 @@
     "tags": ["monster", "slay"]
   },
   { "name": "Lordy", "level": 6, "count": 10, "tags": ["dwarf"] },
-  { "name": "Oni King", "level": 6, "count": 10, "tags": ["evil", "monster"] },
+  { "name": "Oni King", "level": 5, "count": 15, "tags": ["evil", "monster"] },
   {
     "name": "Robinwood",
     "level": 6,
