@@ -289,12 +289,6 @@
     "tags": ["good", "princess", "support"]
   },
   {
-    "name": "Sheep in Wolf's Clothing",
-    "level": 4,
-    "count": 15,
-    "tags": ["evil", "animal", "last breath"]
-  },
-  {
     "name": "Soltak Ancient",
     "level": 4,
     "count": 15,
@@ -326,6 +320,7 @@
     "quest": true,
     "tags": ["good", "prince"]
   },
+  { "name": "Feasting Dragon", "level": 4, "count": 15, "tags": ["dragon", "slay"] },
   {
     "name": "Tweedle Dee",
     "level": 5,
@@ -334,7 +329,6 @@
   },
   { "name": "Burning Tree", "level": 5, "count": 15, "tags": ["treant", "evil"] },
   { "name": "Time Flies", "level": 5, "count": 15, "tags": ["animal"] },
-  { "name": "Feasting Dragon", "level": 5, "count": 15, "tags": ["dragon", "slay"] },
   { "name": "Aon", "level": 5, "count": 15, "tags": ["evil", "mage", "slay"] },
   {
     "name": "Baba Yaga",
