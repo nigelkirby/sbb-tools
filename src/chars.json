@@ -24,15 +24,15 @@
     "tags": ["evil", "animal", "last breath"]
   },
   { "name": "Blind Mouse", "level": 2, "count": 15, "tags": ["animal"] },
+  { "name": "Bossy", "level": 2, "count": 15, "tags": ["dwarf"] },
   {
     "name": "Cinder-Ella",
     "level": 2,
     "count": 15,
     "quest": true,
-    "tags": ["princess", "mage"]
+    "tags": ["royal", "mage"]
   },
   { "name": "Crafty", "level": 2, "count": 15, "tags": ["dwarf"] },
-  { "name": "Fanny", "level": 2, "count": 15, "tags": ["dwarf", "support"] },
   { "name": "Golden Chicken", "level": 2, "count": 15, "tags": ["animal"] },
   {
     "name": "happy little tree",
@@ -57,7 +57,7 @@
     "name": "Lonely Prince",
     "level": 2,
     "count": 15,
-    "tags": ["good", "prince"]
+    "tags": ["good", "royal"]
   },
   {
     "name": "Mad Mim",
@@ -81,7 +81,7 @@
     "name": "Sherwood Sureshot",
     "level": 2,
     "count": 15,
-    "tags": ["good", "princess", "ranged"]
+    "tags": ["good", "royal", "ranged"]
   },
   {
     "name": "Tiny",
@@ -100,7 +100,7 @@
     "level": 3,
     "count": 15,
     "quest": true,
-    "tags": ["good", "princess", "slay"]
+    "tags": ["good", "royal", "slay"]
   },
   {
     "name": "Darkwood Creeper",
@@ -125,20 +125,20 @@
     "name": "Ogre Princess",
     "level": 3,
     "count": 15,
-    "tags": ["monster", "good", "princess", "slay"]
+    "tags": ["monster", "good", "royal", "slay"]
   },
   {
     "name": "Princess Peep",
     "level": 3,
     "count": 15,
-    "tags": ["last breath", "princess", "good"]
+    "tags": ["last breath", "royal", "good"]
   },
   {
     "name": "Princess Wight",
     "level": 3,
     "count": 15,
     "quest": true,
-    "tags": ["evil", "princess"]
+    "tags": ["evil", "royal"]
   },
   {
     "name": "Prized Pig",
@@ -150,13 +150,13 @@
     "name": "Queen of Hearts",
     "level": 3,
     "count": 15,
-    "tags": ["evil", "queen"]
+    "tags": ["evil", "royal"]
   },
   {
     "name": "Romeo",
     "level": 3,
     "count": 15,
-    "tags": ["good", "prince", "last breath"]
+    "tags": ["good", "royal", "last breath"]
   },
   {
     "name": "Shadow Assassin",
@@ -168,7 +168,7 @@
     "name": "Sleeping Princess",
     "level": 3,
     "count": 15,
-    "tags": ["good", "princess"]
+    "tags": ["good", "royal"]
   },
   {
     "name": "Spell Weaver",
@@ -195,6 +195,12 @@
     "tags": ["evil", "monster", "slay"]
   },
   {
+    "name": "Water Wraith",
+    "level": 3,
+    "count": 15,
+    "tags": ["evil", "monster"]
+  },
+  {
     "name": "Wicked Witch of the West",
     "level": 3,
     "count": 15,
@@ -207,12 +213,18 @@
     "tags": ["evil", "monster", "last breath"]
   },
   {
+    "name": "Amy",
+    "level": 4,
+    "count": 15,
+    "tags": ["dwarf", "ranged"]
+  },
+  {
     "name": "Bearded Vulture",
     "level": 4,
     "count": 15,
     "tags": ["evil", "animal"]
   },
-  { "name": "Copycat", "level": 4, "count": 15, "tags": ["animal"] },
+  { "name": "Copycat", "level": 4, "count": 15, "tags": ["animal", "mage"] },
   {
     "name": "Court Wizard",
     "level": 4,
@@ -226,18 +238,24 @@
     "tags": ["good", "fairy"]
   },
   {
+    "name": "Feasting Dragon",
+    "level": 4,
+    "count": 15,
+    "tags": ["dragon", "slay"]
+  },
+  {
     "name": "Friendly Spirit",
     "level": 4,
     "count": 15,
     "tags": ["good", "monster", "last breath"]
   },
-  { "name": "Greedy", "level": 4, "count": 15, "tags": ["dwarf"] },
   {
-    "name": "Grim Soul",
+    "name": "Gingerbread Knight",
     "level": 4,
     "count": 15,
-    "tags": ["monster", "last breath"]
+    "tags": ["good", "royal"]
   },
+  { "name": "Greedy", "level": 4, "count": 15, "tags": ["dwarf"] },
   {
     "name": "Heartwood Elder",
     "level": 4,
@@ -250,7 +268,13 @@
     "count": 15,
     "tags": ["good", "animal"]
   },
-  { "name": "Juliet", "level": 4, "count": 15, "tags": ["good", "princess"] },
+  { "name": "Juliet", "level": 4, "count": 15, "tags": ["good", "royal"] },
+  {
+    "name": "King Arthur",
+    "level": 4,
+    "count": 15,
+    "tags": ["good", "royal"]
+  },
   {
     "name": "Lady of the Lake",
     "level": 4,
@@ -271,12 +295,6 @@
     "tags": ["evil", "monster", "last breath"]
   },
   {
-    "name": "Prince Arthur",
-    "level": 4,
-    "count": 15,
-    "tags": ["good", "prince"]
-  },
-  {
     "name": "Puff Puff",
     "level": 4,
     "count": 15,
@@ -286,7 +304,7 @@
     "name": "Riverwish Mermaid",
     "level": 4,
     "count": 15,
-    "tags": ["good", "princess", "support"]
+    "tags": ["good", "royal", "support"]
   },
   {
     "name": "Soltak Ancient",
@@ -311,30 +329,26 @@
     "level": 4,
     "count": 15,
     "quest": true,
-    "tags": ["good", "prince", "treant"]
+    "tags": ["good", "royal", "treant"]
   },
   {
-    "name": "Gingerbread Kinght",
+    "name": "Time Flies",
     "level": 4,
     "count": 15,
-    "quest": true,
-    "tags": ["good", "prince"]
+    "tags": ["animal"]
   },
-  { "name": "Feasting Dragon", "level": 4, "count": 15, "tags": ["dragon", "slay"] },
   {
-    "name": "Tweedle Dee",
+    "name": "Angry",
     "level": 5,
     "count": 15,
-    "tags": ["dwarf", "last breath"]
+    "tags": ["dwarf"]
   },
-  { "name": "Burning Tree", "level": 5, "count": 15, "tags": ["treant", "evil"] },
-  { "name": "Time Flies", "level": 5, "count": 15, "tags": ["animal"] },
   { "name": "Aon", "level": 5, "count": 15, "tags": ["evil", "mage", "slay"] },
   {
     "name": "Baba Yaga",
     "level": 5,
     "count": 15,
-    "tags": ["evil", "monster", "support"]
+    "tags": ["evil", "monster", "mage", "support"]
   },
   {
     "name": "Baby Bear",
@@ -346,26 +360,26 @@
     "name": "Cupid",
     "level": 5,
     "count": 15,
-    "tags": ["good", "fairy", "flying", "ranged"]
-  },
-  {
-    "name": "Great Pumpkin King",
-    "level": 5,
-    "count": 15,
-    "tags": ["evil", "monster", "last breath"]
+    "tags": ["evil", "fairy", "flying", "ranged"]
   },
   {
     "name": "Lancelot",
     "level": 5,
     "count": 15,
     "quest": true,
-    "tags": ["good", "prince", "slay"]
+    "tags": ["good", "royal", "slay"]
   },
   {
     "name": "Nian, Sea Terror",
     "level": 5,
     "count": 15,
     "tags": ["evil", "monster"]
+  },
+  {
+    "name": "Robinwood",
+    "level": 5,
+    "count": 15,
+    "tags": ["good", "treant", "ranged"]
   },
   {
     "name": "Rotten Appletree",
@@ -381,6 +395,18 @@
     "tags": ["evil", "monster", "slay"]
   },
   {
+    "name": "Three Big Pigs",
+    "level": 5,
+    "count": 15,
+    "tags": ["evil", "animal", "last breath"]
+  },
+  {
+    "name": "Tweedle Dee",
+    "level": 5,
+    "count": 15,
+    "tags": ["dwarf", "last breath"]
+  },
+  {
     "name": "Wombats in Disguise",
     "level": 5,
     "count": 15,
@@ -392,7 +418,14 @@
     "count": 10,
     "tags": ["evil", "treant"]
   },
-  { "name": "Bearstein", "level": 6, "count": 10, "tags": ["good", "animal"] },
+  { "name": "Bearstein", "level": 6, "count": 10, "tags": ["good", "animal", "mage"] },
+  {
+    "name": "Boom Hilda",
+    "level": 6,
+    "count": 10,
+    "tags": ["evil", "monster", "support", "ranged"]
+  },
+  { "name": "Burning Tree", "level": 6, "count": 10, "tags": ["treant", "evil"] },
   { "name": "Doombreath", "level": 6, "count": 10, "tags": ["evil", "dragon"] },
   { "name": "Echowood", "level": 6, "count": 10, "tags": ["treant"] },
   {
@@ -402,17 +435,11 @@
     "tags": ["good", "animal", "last breath"]
   },
   {
-    "name": "Grumblegore",
-    "level": 6,
-    "count": 10,
-    "tags": ["evil", "monster", "support", "ranged"]
-  },
-  {
     "name": "Hercules",
     "level": 6,
     "count": 10,
     "quest": true,
-    "tags": ["good", "prince"]
+    "tags": ["good", "royal"]
   },
   {
     "name": "Jormungand",
@@ -421,24 +448,18 @@
     "tags": ["monster", "slay"]
   },
   { "name": "Lordy", "level": 6, "count": 10, "tags": ["dwarf"] },
-  { "name": "Oni King", "level": 5, "count": 15, "tags": ["evil", "monster"] },
+  { "name": "Oni Tyrant", "level": 5, "count": 15, "tags": ["evil", "monster"] },
+  { "name": "Scion of the Storm", "level": 6, "count": 10, "tags": ["mage"] },
   {
-    "name": "Robinwood",
+    "name": "The Great Pumpkin",
     "level": 6,
     "count": 10,
-    "tags": ["good", "treant", "ranged"]
+    "tags": ["evil", "monster", "last breath"]
   },
   {
     "name": "The Green Knight",
     "level": 6,
     "count": 10,
     "tags": ["good", "treant", "support"]
-  },
-  { "name": "The Storm King", "level": 6, "count": 10, "tags": ["mage"] },
-  {
-    "name": "Three Big Pigs",
-    "level": 6,
-    "count": 10,
-    "tags": ["evil", "animal", "last breath"]
   }
 ]
