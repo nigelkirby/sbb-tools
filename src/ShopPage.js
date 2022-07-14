@@ -51,6 +51,8 @@ function App() {
   const [deadCards, updateDeadCards] = useState([])
   const [showChars, updateShowChars] = useState(false)
   const [piper, updatePiper] = useState(false)
+  const [pans, updatePans] = useState(false)
+  const [toad, updateToad] = useState(false)
 
   return (
     <Container>
@@ -106,22 +108,46 @@ function App() {
                     </Input>
                   </Col>
                 </FormGroup>
-                <FormGroup row>
-                  <Label for="piperMode" sm={6}>
-                    Piper Mode
-                  </Label>
-                  <Col sm={6}>
-                    <Input
-                      type="checkbox"
-                      id="piperMode"
-                      onClick={() => updatePiper(!piper)}
-                    />
-                  </Col>
-                </FormGroup>
                 <Button size="sm" outline id="advanced">
                   More Options
                 </Button>
                 <UncontrolledCollapse toggler="#advanced">
+                  <FormGroup row>
+                    <Label for="piperMode" sm={6}>
+                      Piper Mode
+                    </Label>
+                    <Col sm={6}>
+                      <Input
+                        type="checkbox"
+                        id="piperMode"
+                        onClick={() => updatePiper(!piper) && updatePans(false)}
+                      />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="pansMode" sm={6}>
+                      Pans Shadow Mode
+                    </Label>
+                    <Col sm={6}>
+                      <Input
+                        type="checkbox"
+                        id="pansMode"
+                        onClick={() => updatePans(!pans) && updatePiper(false)}
+                      />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="toadMode" sm={6}>
+                      Staff of Old Toad Mode
+                    </Label>
+                    <Col sm={6}>
+                      <Input
+                        type="checkbox"
+                        id="toadMode"
+                        onClick={() => updateToad(!toad)}
+                      />
+                    </Col>
+                  </FormGroup>
                   <FormGroup row>
                     <Label for="iterations" sm={6}>
                       Sim Iterations
@@ -357,6 +383,8 @@ function App() {
                     iterations,
                     deadCards,
                     piper,
+                    pans,
+                    toad,
                   })
                   ;(function l() {
                     setTimeout(function () {

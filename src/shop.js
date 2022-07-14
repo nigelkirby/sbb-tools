@@ -19,8 +19,10 @@ export function drawHand({
   level = 2,
   deadCards = [],
   piper = false,
+  pans = false,
+  toad = false,
 }) {
-  const leftCards = deadCards.reduce(
+  const cardsLeft = deadCards.reduce(
     (acc, card) => {
       const d = transformedChars[card.name]
       return {
@@ -30,11 +32,23 @@ export function drawHand({
     },
     { ...transformedChars },
   )
-  var deck = Object.entries(leftCards).flatMap(
-    ([name, { count, ...char }]) =>
-      char.level <= level ? new Array(count).fill({ name, ...char }) : [],
-    [],
-  )
+  var deck = Object.entries(cardsLeft)
+    .flatMap(
+      ([name, { count, ...char }]) =>
+        char.level <= level ? new Array(count).fill({ name, ...char }) : [],
+      [],
+    )
+    // when we are in pans mode filter out cards that are < lvl 3 when shop is > lvl 3
+    .filter(({ card }) => {
+      if (pans && level > 3) return card.level > 3
+      return true
+    })
+    // when we are in toad mode filter out cards that are < 3 unless we are level 2 or 3
+    .filter(({ card }) => {
+      if (!toad || level === 2) return true
+      if (level === 3) return card.level === 3
+      return card.level > 3
+    })
   // todo: refrain from mutating deck
   const hand = new Array(handSize).fill({}).map(() => {
     const card = deck[Math.floor(Math.random() * deck.length)]
@@ -57,10 +71,18 @@ export function drawSpell({ level, count }) {
 }
 
 const findSomething = (predicate) =>
-  function* ({ handSize, level, deadCards, iterations = 10, piper = false }) {
+  function* ({
+    handSize,
+    level,
+    deadCards,
+    iterations = 10,
+    piper = false,
+    pans = false,
+    toad = false,
+  }) {
     var target = 0
     for (let i = 0; i < iterations; i++) {
-      const hand = drawHand({ handSize, level, deadCards, piper })
+      const hand = drawHand({ handSize, level, deadCards, piper, pans, toad })
       target += predicate(hand) ? 1 : 0
       if ((i + 1) % 1000 === 0)
         yield {

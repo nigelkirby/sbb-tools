@@ -3,7 +3,9 @@ import ShopPage from './ShopPage'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ga4 from 'react-ga4'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Nav, NavLink } from 'reactstrap'
+import Navigation from './Navigation'
+import StagPage from './StagPage'
+import LandingPage from './LandingPage'
 
 if (process.env.NODE_ENV !== 'development') {
   ga4.initialize('G-3TQRG02P4B')
@@ -18,10 +20,8 @@ function App() {
           path="/"
           element={
             <>
-              <Nav tabs>
-                <NavLink href="/shop">Shop Simulator</NavLink>
-              </Nav>
-              <ShopPage />
+              <Navigation />
+              <LandingPage />
             </>
           }
         ></Route>
@@ -29,11 +29,17 @@ function App() {
           path="/shop"
           element={
             <>
-              <Nav tabs>
-                <NavLink href="/shop">Shop Simulator</NavLink>
-                {/* <NavLink href="/tourney">Tournament Simulator</NavLink> */}
-              </Nav>
+              <Navigation />
               <ShopPage />
+            </>
+          }
+        />
+        <Route
+          path="/stag"
+          element={
+            <>
+              <Navigation />
+              <StagPage />
             </>
           }
         />
