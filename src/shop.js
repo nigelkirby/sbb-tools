@@ -39,15 +39,15 @@ export function drawHand({
       [],
     )
     // when we are in pans mode filter out cards that are < lvl 3 when shop is > lvl 3
-    .filter(({ card }) => {
-      if (pans && level > 3) return card.level > 3
+    .filter(({ char }) => {
+      if (pans && level > 3) return char.level > 3
       return true
     })
     // when we are in toad mode filter out cards that are < 3 unless we are level 2 or 3
-    .filter(({ card }) => {
+    .filter(({ char }) => {
       if (!toad || level === 2) return true
-      if (level === 3) return card.level === 3
-      return card.level > 3
+      if (level === 3) return char.level === 3
+      return char.level > 3
     })
   // todo: refrain from mutating deck
   const hand = new Array(handSize).fill({}).map(() => {
