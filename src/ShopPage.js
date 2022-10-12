@@ -47,7 +47,6 @@ function App() {
   const [targetTag, updateTargetTag] = useState('')
   const [desiredTags, updateDesiredTags] = useState([])
   const [deadCardSelection, updateDeadCardSelection] = useState()
-  const [deadCardCount, updateDeadCardCount] = useState(1)
   const [deadCards, updateDeadCards] = useState([])
   const [showChars, updateShowChars] = useState(false)
   const [piper, updatePiper] = useState(false)
@@ -169,18 +168,18 @@ function App() {
         <Col sm={6}>
           <Card>
             <CardBody>
-              <CardTitle tag="h5">Dead Cards</CardTitle>
+              <CardTitle tag="h5">Questers Removed</CardTitle>
               <CardSubtitle className="mb-2 text-muted" tag="h6">
-                Remove cards from the pool (quester support currently limited,
-                it assumes these are your cards)
+                Select the quest units that have been removed from the pool.
               </CardSubtitle>
               <Combobox
                 value={deadCardSelection}
                 onChange={(card) => {
                   updateDeadCardSelection(card)
-                  updateDeadCardCount(1)
                 }}
-                data={chars.map(({ name }) => name)}
+                data={chars
+                  .filter(({ quest }) => quest)
+                  .map(({ name }) => name)}
                 filter="contains"
               />
               <Label for="deadCardCount">Amount Dead</Label>
@@ -191,18 +190,10 @@ function App() {
                     ...deadCards.filter(
                       ({ name }) => name !== deadCardSelection,
                     ),
-                    { name: deadCardSelection, count: deadCardCount },
+                    { name: deadCardSelection },
                   ])
                 }}
               >
-                <Input
-                  id="deadCardCount"
-                  type="number"
-                  min={1}
-                  max={15}
-                  value={deadCardCount}
-                  onChange={(e) => updateDeadCardCount(e.target.value)}
-                ></Input>
                 <Button
                   type="submit"
                   onClick={() =>
@@ -210,7 +201,7 @@ function App() {
                       ...deadCards.filter(
                         ({ name }) => name !== deadCardSelection,
                       ),
-                      { name: deadCardSelection, count: deadCardCount },
+                      { name: deadCardSelection },
                     ])
                   }
                 >
