@@ -27,7 +27,7 @@ export function drawHand({
       const d = transformedChars[card.name]
       return {
         ...acc,
-        [card.name]: { ...d, count: d.quest ? 0 : d.count - card.count },
+        [card.name]: { ...d, count: d.quest ? 0 : d.count },
       }
     },
     { ...transformedChars },

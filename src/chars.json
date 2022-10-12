@@ -238,6 +238,12 @@
     "tags": ["good", "fairy"]
   },
   {
+    "name": "Fanny",
+    "level": 4,
+    "count": 15,
+    "tags": ["dwarf", "support"]
+  },
+  {
     "name": "Feasting Dragon",
     "level": 4,
     "count": 15,
@@ -418,16 +424,32 @@
     "count": 10,
     "tags": ["evil", "treant"]
   },
-  { "name": "Bearstein", "level": 6, "count": 10, "tags": ["good", "animal", "mage"] },
+  {
+    "name": "Bearstein",
+    "level": 6,
+    "count": 10,
+    "tags": ["good", "animal", "mage"]
+  },
   {
     "name": "Boom Hilda",
     "level": 6,
     "count": 10,
     "tags": ["evil", "monster", "support", "ranged"]
   },
-  { "name": "Burning Tree", "level": 6, "count": 10, "tags": ["treant", "evil"] },
+  {
+    "name": "Burning Tree",
+    "level": 6,
+    "count": 10,
+    "tags": ["treant", "evil"]
+  },
   { "name": "Doombreath", "level": 6, "count": 10, "tags": ["evil", "dragon"] },
   { "name": "Echowood", "level": 6, "count": 10, "tags": ["treant"] },
+  {
+    "name": "Empress Pea",
+    "level": 6,
+    "count": 10,
+    "tags": ["good", "royal", "last breath"]
+  },
   {
     "name": "Good Boy",
     "level": 6,
@@ -448,7 +470,12 @@
     "tags": ["monster", "slay"]
   },
   { "name": "Lordy", "level": 6, "count": 10, "tags": ["dwarf"] },
-  { "name": "Oni Tyrant", "level": 5, "count": 15, "tags": ["evil", "monster"] },
+  {
+    "name": "Oni Tyrant",
+    "level": 6,
+    "count": 10,
+    "tags": ["evil", "monster"]
+  },
   { "name": "Scion of the Storm", "level": 6, "count": 10, "tags": ["mage"] },
   {
     "name": "The Great Pumpkin",
