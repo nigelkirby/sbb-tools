@@ -41,12 +41,11 @@ function App() {
   const [prob, updateProb] = useState(0)
   const [progress, updateProgress] = useState(0)
   const [inProgress, updateInProgress] = useState(false)
-  const [iterations, updateIterations] = useState(1000)
+  const [iterations, updateIterations] = useState(10000)
   const [targetCard, updateTargetCard] = useState()
   const [desiredCards, updateDesiredCards] = useState([])
   const [targetTag, updateTargetTag] = useState('')
   const [desiredTags, updateDesiredTags] = useState([])
-  const [deadCardSelection, updateDeadCardSelection] = useState()
   const [deadCards, updateDeadCards] = useState([])
   const [showChars, updateShowChars] = useState(false)
   const [piper, updatePiper] = useState(false)
@@ -168,68 +167,36 @@ function App() {
         <Col sm={6}>
           <Card>
             <CardBody>
-              <CardTitle tag="h5">Questers Removed</CardTitle>
+              <CardTitle tag="h5">Remove Questers</CardTitle>
               <CardSubtitle className="mb-2 text-muted" tag="h6">
                 Select the quest units that have been removed from the pool.
               </CardSubtitle>
-              <Combobox
-                value={deadCardSelection}
-                onChange={(card) => {
-                  updateDeadCardSelection(card)
-                }}
-                data={chars
-                  .filter(({ quest }) => quest)
-                  .map(({ name }) => name)}
-                filter="contains"
-              />
-              <Label for="deadCardCount">Amount Dead</Label>
-              <Form
-                onSubmit={(e) => {
-                  e.preventDefault()
-                  updateDeadCards([
-                    ...deadCards.filter(
-                      ({ name }) => name !== deadCardSelection,
-                    ),
-                    { name: deadCardSelection },
-                  ])
-                }}
-              >
-                <Button
-                  type="submit"
-                  onClick={() =>
-                    updateDeadCards([
-                      ...deadCards.filter(
-                        ({ name }) => name !== deadCardSelection,
-                      ),
-                      { name: deadCardSelection },
-                    ])
-                  }
-                >
-                  Remove/Update Amount
-                </Button>
-                <Button onClick={() => updateDeadCards([])}>
-                  Clear Dead Cards
-                </Button>
-              </Form>
-              <Col>
-                <ul className="list-group">
-                  {deadCards.map((card, i) => (
-                    <li className="list-group-item">
-                      {card.name} {card.count}
+              <Container>
+                <Row>
+                  {chars
+                    .filter(({ quest }) => quest)
+                    .map((char) => (
                       <Button
-                        style={{ float: 'right' }}
-                        close
+                        tag="div"
+                        className="col-sm-4"
                         onClick={() =>
-                          updateDeadCards([
-                            ...deadCards.slice(0, i),
-                            ...deadCards.slice(i + 1),
-                          ])
+                          deadCards.find((c) => c.name === char.name)
+                            ? updateDeadCards(
+                                deadCards.filter((c) => c.name !== char.name),
+                              )
+                            : updateDeadCards([...deadCards, char])
                         }
-                      ></Button>
-                    </li>
-                  ))}
-                </ul>
-              </Col>
+                        color={
+                          deadCards.find((c) => c.name === char.name)
+                            ? 'primary'
+                            : 'secondary'
+                        }
+                      >
+                        {char.name}
+                      </Button>
+                    ))}
+                </Row>
+              </Container>
             </CardBody>
           </Card>
         </Col>
