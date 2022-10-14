@@ -2,6 +2,7 @@ const scoreMap = [10, 8, 7, 6, 4, 3, 2, 1]
 const scoreMap6 = [10, 8, 6, 4, 2, 1]
 
 function initPlayerBase({ currentPointTotals, playerCount = 32 }) {
+  console.log(currentPointTotals)
   if (currentPointTotals)
     return currentPointTotals.map((points, id) => ({
       id,
@@ -53,7 +54,7 @@ function simulateGame(tableOfPlayers) {
   return [...tableOfPlayers].shuffle().map(roundMapper)
 }
 
-function playRound({ players, simulateDrop = false, cutoff }, roundsLeft) {
+function playRound({ players, simulateDrop = 0, cutoff }, roundsLeft) {
   // console.log(players.length)
   // divide into tables
   const emptyTables = Array(Math.ceil(players.length / 8)).fill([])
@@ -65,8 +66,9 @@ function playRound({ players, simulateDrop = false, cutoff }, roundsLeft) {
     return acc
   }, emptyTables)
 
+  const fixedTables = fixTables(tables)
   // run sim of each game
-  const newScores = tables.map(simulateGame).flat().sort(sortByPointsDesc)
+  const newScores = fixedTables.map(simulateGame).flat().sort(sortByPointsDesc)
   if (!simulateDrop) return { players: newScores, cutoff }
 
   const maxPointsAcheivable = roundsLeft * scoreMap[0]
@@ -76,9 +78,19 @@ function playRound({ players, simulateDrop = false, cutoff }, roundsLeft) {
   const mathematicallyEliminatedIndex = newScores.findIndex(
     (p) => p.points + maxPointsAcheivable < minPossibleCutoff,
   )
+  const eliminatedCount = newScores.length - mathematicallyEliminatedIndex
+  const numberOfPlayersNotDropping = Math.floor(
+    (1 - simulateDrop / 100) * eliminatedCount,
+  )
+  const eliminatedPlayers = newScores
+    .slice(mathematicallyEliminatedIndex)
+    .shuffle()
 
   return {
-    players: newScores.slice(0, mathematicallyEliminatedIndex),
+    players: [
+      ...newScores.slice(0, mathematicallyEliminatedIndex),
+      ...eliminatedPlayers.slice(0, numberOfPlayersNotDropping),
+    ],
     simulateDrop,
     cutoff,
   }
@@ -92,6 +104,24 @@ Array.prototype.shuffle = function () {
   return this
 }
 
+function fixTables(tables) {
+  // not in love with this alg but making it more declarative will cause a much larger memory footprint
+  // The goal here is to have a maximum of one seven player table, as that is how SBB tournaments are currently run
+  const eightPlayerTables = tables.filter((t) => t.length === 8)
+  const sevenPlayerTables = tables.filter((t) => t.length === 7)
+  const sixPlayerTables = []
+
+  const numberOfSevenPlayerTables = sevenPlayerTables.length
+  for (let i = 0; i < Math.floor(numberOfSevenPlayerTables / 2); i++) {
+    const t = sevenPlayerTables.pop()
+    const t2 = sevenPlayerTables.pop()
+    const p = t.pop()
+    t2.push(p)
+    eightPlayerTables.push(t2)
+    sixPlayerTables.push(t)
+  }
+  return [...eightPlayerTables, ...sevenPlayerTables, ...sixPlayerTables]
+}
 /**
  * Exec
  */

@@ -17,6 +17,11 @@ import {
   Form,
   FormGroup,
   Button,
+  CardText,
+  CardTitle,
+  CardSubtitle,
+  InputGroup,
+  InputGroupText,
 } from 'reactstrap'
 
 if (process.env.NODE_ENV !== 'development') {
@@ -37,21 +42,43 @@ function App() {
   const [iterations, updateIterations] = useState(500)
   const [data, updateData] = useState([])
   const [thresholds, updateThresholds] = useState(0)
-  const [simulateDrop, updateSimulateDrop] = useState(false)
+  const [simulateDrop, updateSimulateDrop] = useState(0)
+  const [standings, updateStandings] = useState(undefined)
 
   function runSim() {
     const newData = Array(iterations)
       .fill(0)
-      .map(() => simulateCutoff({ rounds, cutoff, playerCount, simulateDrop }))
+      .map(() =>
+        simulateCutoff({
+          rounds,
+          cutoff,
+          playerCount,
+          simulateDrop,
+          standings,
+        }),
+      )
     const set = [...new Set(newData)]
     updateThresholds(set.length)
     updateData(newData)
+  }
+  function handleStandingInput(rawVals) {
+    const lines = rawVals.split('\n')
+    const parsedLines = lines
+      .map((l) => parseInt(l, 10))
+      .filter((l) => !isNaN(l))
+    updateStandings(parsedLines.length > 0 ? parsedLines : undefined)
   }
   return (
     <Container>
       <div className="jumbotron">
         <h1 className="display-6">SBB tourney simulator</h1>
-        <p className="lead"></p>
+        <p className="lead">
+          This attempts to simulate a number of iterations of an SBB official
+          tournament, for reference:{' '}
+          <a href="https://sbb-tournaments.netlify.app/docs/qualifiers/">
+            the rules of the format
+          </a>
+        </p>
       </div>
       <Row>
         <Col lg={6}>
@@ -136,7 +163,7 @@ function App() {
                 </FormGroup>
                 <FormGroup row>
                   <Label for="players" sm={6}>
-                    Players
+                    Player Count
                   </Label>
                   <Col sm={6}>
                     <Input
@@ -179,23 +206,60 @@ function App() {
                 </FormGroup>
                 <FormGroup row>
                   <Label for="dropPlayers" sm={6}>
-                    Eliminated Players Drop?
+                    Percentage of players that are mathematically eliminated
+                    from reaching the cutoff that drop
                   </Label>
                   <Col sm={6}>
-                    <Input
-                      type="checkbox"
-                      id="dropPlayers"
-                      onClick={() => updateSimulateDrop(!simulateDrop)}
-                    />
+                    <InputGroup>
+                      <Input
+                        id="dropPlayers"
+                        type="number"
+                        value={simulateDrop}
+                        min={0}
+                        max={100}
+                        onChange={(e) =>
+                          updateSimulateDrop(parseInt(e.target.value))
+                        }
+                      />
+                      <InputGroupText>%</InputGroupText>
+                    </InputGroup>
                   </Col>
                 </FormGroup>
-                <Button onClick={runSim}>Run</Button>
+                <FormGroup row>
+                  <Label for="players" sm={6}>
+                    Paste the current point totals, separated by a newline.
+                    Lines that can't be parsed as numbers are ignored. Note that
+                    the 'Player Count' value is ignored when providing custom
+                    standings
+                  </Label>
+                  <Col sm={6}>
+                    <InputGroup>
+                      <Input
+                        id="players"
+                        type="textarea"
+                        onChange={(e) => handleStandingInput(e.target.value)}
+                        rows="10"
+                      />
+                    </InputGroup>
+                  </Col>
+                </FormGroup>
+                <Button onClick={runSim} color="primary">
+                  Run
+                </Button>
+                <Button onClick={() => updateStandings(undefined)}>
+                  Clear Standings
+                </Button>
               </Form>
             </CardBody>
           </Card>
           <Card>
             <CardBody>
-              <p>
+              <CardTitle tag="h5">Stats</CardTitle>
+              <CardSubtitle tag="h6" className="text-muted">
+                Note that some players beneath the cutoff placement may have the
+                same amount of points
+              </CardSubtitle>
+              <CardText>
                 Average:{' '}
                 {data.reduce((acc, el) => el / data.length + acc, 0).toFixed(2)}
                 <br />
@@ -204,25 +268,33 @@ function App() {
                 p(95): {getPercentile(data, 95)}
                 <br />
                 p(99): {getPercentile(data, 99)}
-              </p>
+              </CardText>
             </CardBody>
           </Card>
         </Col>
-        <Col lg={6}>
+        <Col>
           <Card>
             <CardBody>
-              {data.length ? (
+              {
                 <HistogramChart
                   data={data}
-                  xLabel="points"
+                  xLabel="points at cutoff"
                   color="green"
                   thresholds={(data) => [...new Set(data)].length}
                 />
-              ) : (
-                <></>
-              )}
+              }
             </CardBody>
           </Card>
+          <CardBody>
+            <CardTitle tag="h5">Current Standings</CardTitle>
+            {standings && (
+              <ul>
+                {standings.map((s) => (
+                  <li>{s}</li>
+                ))}
+              </ul>
+            )}
+          </CardBody>
         </Col>
       </Row>
     </Container>
