@@ -15,7 +15,6 @@ import {
   Progress,
   Form,
   FormGroup,
-  UncontrolledCollapse,
 } from 'reactstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-widgets/styles.css'
@@ -106,60 +105,55 @@ function App() {
                     </Input>
                   </Col>
                 </FormGroup>
-                <Button size="sm" outline id="advanced">
-                  More Options
-                </Button>
-                <UncontrolledCollapse toggler="#advanced">
-                  <FormGroup row>
-                    <Label for="piperMode" sm={6}>
-                      Piper Mode
-                    </Label>
-                    <Col sm={6}>
-                      <Input
-                        type="checkbox"
-                        id="piperMode"
-                        onClick={() => updatePiper(!piper) && updatePans(false)}
-                      />
-                    </Col>
-                  </FormGroup>
-                  <FormGroup row>
-                    <Label for="pansMode" sm={6}>
-                      Pans Shadow Mode
-                    </Label>
-                    <Col sm={6}>
-                      <Input
-                        type="checkbox"
-                        id="pansMode"
-                        onClick={() => updatePans(!pans) && updatePiper(false)}
-                      />
-                    </Col>
-                  </FormGroup>
-                  <FormGroup row>
-                    <Label for="toadMode" sm={6}>
-                      Staff of Old Toad Mode
-                    </Label>
-                    <Col sm={6}>
-                      <Input
-                        type="checkbox"
-                        id="toadMode"
-                        onClick={() => updateToad(!toad)}
-                      />
-                    </Col>
-                  </FormGroup>
-                  <FormGroup row>
-                    <Label for="iterations" sm={6}>
-                      Sim Iterations
-                    </Label>
-                    <Col sm={6}>
-                      <Input
-                        id="iterations"
-                        type="number"
-                        value={iterations}
-                        onChange={(e) => updateIterations(e.target.value)}
-                      />
-                    </Col>
-                  </FormGroup>
-                </UncontrolledCollapse>
+                <FormGroup row>
+                  <Label for="piperMode" sm={6}>
+                    Piper Mode
+                  </Label>
+                  <Col sm={6}>
+                    <Input
+                      type="checkbox"
+                      id="piperMode"
+                      onClick={() => updatePiper(!piper) && updatePans(false)}
+                    />
+                  </Col>
+                </FormGroup>
+                <FormGroup row>
+                  <Label for="pansMode" sm={6}>
+                    Pans Shadow Mode
+                  </Label>
+                  <Col sm={6}>
+                    <Input
+                      type="checkbox"
+                      id="pansMode"
+                      onClick={() => updatePans(!pans) && updatePiper(false)}
+                    />
+                  </Col>
+                </FormGroup>
+                <FormGroup row>
+                  <Label for="toadMode" sm={6}>
+                    Staff of Old Toad Mode
+                  </Label>
+                  <Col sm={6}>
+                    <Input
+                      type="checkbox"
+                      id="toadMode"
+                      onClick={() => updateToad(!toad)}
+                    />
+                  </Col>
+                </FormGroup>
+                <FormGroup row>
+                  <Label for="iterations" sm={6}>
+                    Sim Iterations
+                  </Label>
+                  <Col sm={6}>
+                    <Input
+                      id="iterations"
+                      type="number"
+                      value={iterations}
+                      onChange={(e) => updateIterations(e.target.value)}
+                    />
+                  </Col>
+                </FormGroup>
               </Form>
             </CardBody>
           </Card>
@@ -191,6 +185,11 @@ function App() {
                             ? 'primary'
                             : 'secondary'
                         }
+                        style={{
+                          fontStyle: deadCards.find((c) => c.name === char.name)
+                            ? 'italic'
+                            : 'inherit',
+                        }}
                       >
                         {char.name}
                       </Button>
@@ -199,34 +198,6 @@ function App() {
               </Container>
             </CardBody>
           </Card>
-        </Col>
-        <Col sm={3}>
-          <Card>
-            <CardBody>
-              <CardTitle tag="h5">Draw Simulator</CardTitle> <br />
-              <Button
-                color="primary"
-                onClick={() =>
-                  updateHand(drawHand({ level, handSize, deadCards, piper })) ||
-                  updateSpells(drawSpell({ level, count: 1 }))
-                }
-              >
-                Roll
-              </Button>
-              <ul>
-                {hand.map((el, i) => (
-                  <li key={el.name + i}>{el.name}</li>
-                ))}
-              </ul>
-              <ul>
-                {spells.map((el, i) => (
-                  <li key={el.name + i}>{el.name}</li>
-                ))}
-              </ul>
-            </CardBody>
-          </Card>
-        </Col>
-        <Col lg={6}>
           <Card>
             <CardBody>
               <CardTitle tag={'h5'}>Probability Analysis</CardTitle>
@@ -368,7 +339,31 @@ function App() {
             </CardBody>
           </Card>
         </Col>
-        <Col lg={6}>
+        <Col sm={3}>
+          <Card>
+            <CardBody>
+              <CardTitle tag="h5">Draw Simulator</CardTitle> <br />
+              <Button
+                color="primary"
+                onClick={() =>
+                  updateHand(drawHand({ level, handSize, deadCards, piper })) ||
+                  updateSpells(drawSpell({ level, count: 1 }))
+                }
+              >
+                Roll
+              </Button>
+              <ul>
+                {hand.map((el, i) => (
+                  <li key={el.name + i}>{el.name}</li>
+                ))}
+              </ul>
+              <ul>
+                {spells.map((el, i) => (
+                  <li key={el.name + i}>{el.name}</li>
+                ))}
+              </ul>
+            </CardBody>
+          </Card>
           <Card>
             <CardBody>
               <CardTitle tag={'h5'}>The Odds</CardTitle>
