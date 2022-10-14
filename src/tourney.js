@@ -1,9 +1,5 @@
-// const scoreMap = [10, 8, 6, 5, 3, 2, 1, 1]
-// const cutoff = 32
-// const rounds = 7
 const scoreMap = [10, 8, 7, 6, 4, 3, 2, 1]
-const cutoff = 8
-const rounds = 6
+const scoreMap6 = [10, 8, 6, 4, 2, 1]
 
 function initPlayerBase({ currentPointTotals, playerCount = 32 }) {
   if (currentPointTotals)
@@ -19,53 +15,73 @@ function initPlayerBase({ currentPointTotals, playerCount = 32 }) {
 
 const sortByPointsDesc = (a, b) => b.points - a.points
 
-function simulateCutoff(standings) {
-  const allPlayers = initPlayerBase({ currentPointTotals: standings })
+export function simulateCutoff({
+  standings,
+  cutoff,
+  rounds,
+  playerCount,
+  simulateDrop,
+}) {
+  const allPlayers = initPlayerBase({
+    currentPointTotals: standings,
+    playerCount,
+  })
 
-  const finalStandings = recur(playRound)(allPlayers, rounds)
+  const { players: finalStandings } = recur(playRound)(
+    { players: allPlayers, cutoff, simulateDrop },
+    rounds,
+  )
   finalStandings.sort(sortByPointsDesc)
   return finalStandings[cutoff - 1].points
 }
 
 function recur(cb) {
   return function a(data, limit) {
-    return limit == 0 ? data : a(cb(data, limit - 1), limit - 1)
+    return limit === 0 ? data : a(cb(data, limit - 1), limit - 1)
   }
 }
 
 function simulateGame(tableOfPlayers) {
   const roundMapper = (player, i) => ({
     ...player,
-    points: player.points + scoreMap[i % scoreMap.length],
+    points:
+      player.points +
+      (tableOfPlayers.length > 6
+        ? scoreMap[i % scoreMap.length]
+        : scoreMap6[i % scoreMap6.length]),
   })
   return [...tableOfPlayers].shuffle().map(roundMapper)
 }
 
-function playRound(players, roundsLeft, simulateDrop = false) {
+function playRound({ players, simulateDrop = false, cutoff }, roundsLeft) {
   // console.log(players.length)
   // divide into tables
   const emptyTables = Array(Math.ceil(players.length / 8)).fill([])
   const tables = players.shuffle().reduce((acc, player, i) => {
     const t = i % acc.length
     // this is pushing one player onto each table until there are no more players, the tables are as even as can be
+    // TODO fix this to follow the rules of creating tables
     acc[t] = [...acc[t], player]
     return acc
   }, emptyTables)
 
   // run sim of each game
   const newScores = tables.map(simulateGame).flat().sort(sortByPointsDesc)
-  if (!simulateDrop) return newScores
+  if (!simulateDrop) return { players: newScores, cutoff }
 
   const maxPointsAcheivable = roundsLeft * scoreMap[0]
   const minPointsAcheivable = roundsLeft * scoreMap.slice(-1)[0]
 
+  const minPossibleCutoff = newScores[cutoff - 1].points + minPointsAcheivable
   const mathematicallyEliminatedIndex = newScores.findIndex(
-    (p) =>
-      p.points <
-      newScores[cutoff - 1].points + minPointsAcheivable - maxPointsAcheivable,
+    (p) => p.points + maxPointsAcheivable < minPossibleCutoff,
   )
 
-  return newScores.slice(0, mathematicallyEliminatedIndex)
+  return {
+    players: newScores.slice(0, mathematicallyEliminatedIndex),
+    simulateDrop,
+    cutoff,
+  }
 }
 
 Array.prototype.shuffle = function () {
@@ -74,14 +90,6 @@ Array.prototype.shuffle = function () {
     ;[this[i], this[j]] = [this[j], this[i]]
   }
   return this
-}
-
-function getMedian(data) {
-  const values = [...data].sort()
-  const mid = Math.floor(data.length / 2)
-  return data.length % 2 !== 0
-    ? values[mid]
-    : (values[mid - 1] + values[mid]) / 2
 }
 
 /**
@@ -94,10 +102,3 @@ function getMedian(data) {
 //   24, 24, 23, 23, 23, 23, 22, 22, 22, 21, 21, 21, 19, 40, 39, 39, 39, 36, 36,
 //   36, 35, 34, 32, 31, 30, 30, 29, 28, 27, 25, 24, 24, 24, 22, 18, 16, 15, 13,
 // ]
-
-const simulations = 1000
-const cutoffs = Array(simulations)
-  .fill(0)
-  .map(() => simulateCutoff())
-console.log(cutoffs.reduce((acc, val) => acc + val, 0) / cutoffs.length)
-console.log(getMedian(cutoffs))

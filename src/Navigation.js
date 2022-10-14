@@ -8,6 +8,9 @@ export default function Navigation() {
         <NavItem>
           <NavLink href="/shop">Shop Simulator</NavLink>
         </NavItem>
+        <NavItem>
+          <NavLink href="/tourney">Tourney Simulator</NavLink>
+        </NavItem>
         {/* <NavLink href="/stag">Stag Stats Calculator</NavLink> */}
       </Nav>
     </Navbar>

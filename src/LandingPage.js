@@ -39,6 +39,19 @@ export default function LandingPage() {
             </CardBody>
           </Card>
         </Col>
+        <Col md={4}>
+          <Card>
+            <CardBody>
+              <CardTitle tag="h5">
+                <Link to="/tourney">Tournament Simulator</Link>
+              </CardTitle>
+              <CardText>
+                Simulate an SBB monthly or Champs to determine the likely points
+                requires to reach a given cutoff (such as top 8)
+              </CardText>
+            </CardBody>
+          </Card>
+        </Col>
       </Row>
     </Container>
   )
