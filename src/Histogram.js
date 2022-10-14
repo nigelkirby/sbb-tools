@@ -49,19 +49,21 @@ const HistogramChart = ({
       for (let i = 0; i < Y.length; ++i) Y[i] /= total
     }
 
+    let _xDomain = xDomain
+    let _yDomain = yDomain
     // Compute default domains.
-    if (xDomain === undefined) xDomain = [bins[0].x0, bins[bins.length - 1].x1]
-    if (yDomain === undefined) yDomain = [0, d3.max(Y)]
+    if (xDomain === undefined) _xDomain = [bins[0].x0, bins[bins.length - 1].x1]
+    if (yDomain === undefined) _yDomain = [0, d3.max(Y)]
 
     // Construct scales and axes.
-    const xScale = xType(xDomain, xRange)
-    const yScale = yType(yDomain, yRange)
+    const xScale = xType(_xDomain, xRange)
+    const yScale = yType(_yDomain, yRange)
     const xAxis = d3
       .axisBottom(xScale)
       .ticks(width / 80, xFormat)
       .tickSizeOuter(0)
     const yAxis = d3.axisLeft(yScale).ticks(height / 40, yFormat)
-    yFormat = yScale.tickFormat(100, yFormat)
+    const _yFormat = yScale.tickFormat(100, yFormat)
 
     const svgEl = d3.select(svgRef.current)
     svgEl.selectAll('*').remove()
@@ -106,7 +108,7 @@ const HistogramChart = ({
       .attr('y', (d, i) => yScale(Y[i]))
       .attr('height', (d, i) => yScale(0) - yScale(Y[i]))
       .append('title')
-      .text((d, i) => [`${d.x0} ≤ x < ${d.x1}`, yFormat(Y[i])].join('\n'))
+      .text((d, i) => [`${d.x0} ≤ x < ${d.x1}`, _yFormat(Y[i])].join('\n'))
 
     svg
       .append('g')
@@ -121,7 +123,7 @@ const HistogramChart = ({
           .attr('text-anchor', 'end')
           .text(xLabel),
       )
-  }, [data])
+  })
   return <svg ref={svgRef} />
 }
 

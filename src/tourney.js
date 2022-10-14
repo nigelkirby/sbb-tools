@@ -2,7 +2,6 @@ const scoreMap = [10, 8, 7, 6, 4, 3, 2, 1]
 const scoreMap6 = [10, 8, 6, 4, 2, 1]
 
 function initPlayerBase({ currentPointTotals, playerCount = 32 }) {
-  console.log(currentPointTotals)
   if (currentPointTotals)
     return currentPointTotals.map((points, id) => ({
       id,
@@ -51,14 +50,14 @@ function simulateGame(tableOfPlayers) {
         ? scoreMap[i % scoreMap.length]
         : scoreMap6[i % scoreMap6.length]),
   })
-  return [...tableOfPlayers].shuffle().map(roundMapper)
+  return shuffleArray([...tableOfPlayers]).map(roundMapper)
 }
 
 function playRound({ players, simulateDrop = 0, cutoff }, roundsLeft) {
   // console.log(players.length)
   // divide into tables
   const emptyTables = Array(Math.ceil(players.length / 8)).fill([])
-  const tables = players.shuffle().reduce((acc, player, i) => {
+  const tables = shuffleArray(players).reduce((acc, player, i) => {
     const t = i % acc.length
     // this is pushing one player onto each table until there are no more players, the tables are as even as can be
     // TODO fix this to follow the rules of creating tables
@@ -82,9 +81,9 @@ function playRound({ players, simulateDrop = 0, cutoff }, roundsLeft) {
   const numberOfPlayersNotDropping = Math.floor(
     (1 - simulateDrop / 100) * eliminatedCount,
   )
-  const eliminatedPlayers = newScores
-    .slice(mathematicallyEliminatedIndex)
-    .shuffle()
+  const eliminatedPlayers = shuffleArray(
+    newScores.slice(mathematicallyEliminatedIndex),
+  )
 
   return {
     players: [
@@ -96,12 +95,19 @@ function playRound({ players, simulateDrop = 0, cutoff }, roundsLeft) {
   }
 }
 
-Array.prototype.shuffle = function () {
-  for (let i = this.length - 1; i > 0; i--) {
+// Array.prototype.shuffle = function () {
+//   for (let i = this.length - 1; i > 0; i--) {
+//     const j = Math.floor(Math.random() * (i + 1))
+//     ;[this[i], this[j]] = [this[j], this[i]]
+//   }
+//   return this
+// }
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
-    ;[this[i], this[j]] = [this[j], this[i]]
+    ;[array[i], array[j]] = [array[j], array[i]]
   }
-  return this
+  return array
 }
 
 function fixTables(tables) {
