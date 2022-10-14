@@ -7,7 +7,7 @@ import Navigation from './Navigation'
 // import StagPage from './StagPage'
 import TourneyPage from './TourneyPage'
 import LandingPage from './LandingPage'
-import BattleSimPage from './BattleSimPage'
+// import BattleSimPage from './BattleSimPage'
 
 if (process.env.NODE_ENV !== 'development') {
   ga4.initialize('G-3TQRG02P4B')
@@ -36,7 +36,7 @@ function App() {
             </>
           }
         />
-        <Route
+        {/* <Route
           path="/sim"
           element={
             <>
@@ -44,7 +44,7 @@ function App() {
               <BattleSimPage />
             </>
           }
-        />
+        /> */}
         {/* <Route
           path="/stag"
           element={
