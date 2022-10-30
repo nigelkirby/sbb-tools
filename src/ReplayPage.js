@@ -129,7 +129,7 @@ function App() {
         <Row>
           <Col>
             <div className="jumbotron">
-              <h1 className="display-6"></h1>
+              {/* <h1 className="display-6"></h1> */}
               <p className="lead">Finish: {game.placement}</p>
               <ButtonGroup>
                 <Button onClick={() => updateGame(undefined)}>Reset</Button>
