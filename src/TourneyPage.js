@@ -288,11 +288,14 @@ function App() {
           <CardBody>
             <CardTitle tag="h5">Current Standings</CardTitle>
             {standings && (
-              <ul>
-                {standings.map((s) => (
-                  <li>{s}</li>
-                ))}
-              </ul>
+              <div>
+                <p>Players Left: {standings.length}</p>
+                <ul>
+                  {standings.map((s) => (
+                    <li>{s}</li>
+                  ))}
+                </ul>
+              </div>
             )}
           </CardBody>
         </Col>

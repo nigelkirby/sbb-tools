@@ -7,6 +7,7 @@ import Navigation from './Navigation'
 // import StagPage from './StagPage'
 import TourneyPage from './TourneyPage'
 import LandingPage from './LandingPage'
+import ReplayPage from './ReplayPage'
 // import BattleSimPage from './BattleSimPage'
 
 if (process.env.NODE_ENV !== 'development') {
@@ -60,6 +61,15 @@ function App() {
             <>
               <Navigation />
               <TourneyPage />
+            </>
+          }
+        />
+        <Route
+          path="/replay"
+          element={
+            <>
+              <Navigation />
+              <ReplayPage />
             </>
           }
         />
