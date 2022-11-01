@@ -44,9 +44,8 @@ function parseLog(log) {
         return {
           [player[0] === hero ? 'us' : 'them']: {
             name: player[0],
-            healthBefore:
-              playerDetails[player[0]].health[round === 0 ? 0 : round - 1],
-            healthAfter: playerDetails[player[0]].health[round],
+            healthBefore: playerDetails[player[0]].health[round],
+            healthAfter: playerDetails[player[0]].health[round + 1],
             hero: playerDetails[player[0]].heroes[round],
             xp: playerDetails[player[0]].xp[round],
             ...player[1],

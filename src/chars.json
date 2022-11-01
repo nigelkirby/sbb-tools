@@ -224,7 +224,7 @@
     "count": 15,
     "tags": ["evil", "animal"]
   },
-  { "name": "Copycat", "level": 4, "count": 15, "tags": ["animal", "mage"] },
+  { "name": "Copycat", "level": 4, "count": 15, "tags": ["animal"] },
   {
     "name": "Court Wizard",
     "level": 4,
