@@ -67,6 +67,7 @@ export default function Board({ details }) {
                       <img
                         src={`${process.env.PUBLIC_URL}/cards/${t
                           .replace(',', '')
+                          .replace('!', '')
                           .replace("'", '')}.png`}
                         alt={t}
                       />
