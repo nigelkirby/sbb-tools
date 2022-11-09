@@ -1,13 +1,13 @@
 // import './App.css';
-import ShopPage from './ShopPage'
+import ShopPage from './Pages/ShopPage'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ga4 from 'react-ga4'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Navigation from './Navigation'
+import Navigation from './Components/Navigation'
 // import StagPage from './StagPage'
-import TourneyPage from './TourneyPage'
-import LandingPage from './LandingPage'
-import ReplayPage from './ReplayPage'
+import TourneyPage from './Pages/TourneyPage'
+import LandingPage from './Pages/LandingPage'
+import ReplayPage from './Pages/ReplayPage'
 // import BattleSimPage from './BattleSimPage'
 
 if (process.env.NODE_ENV !== 'development') {
