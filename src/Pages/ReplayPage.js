@@ -26,7 +26,7 @@ import CharacterBoard from '../CharacterBoard'
 
 if (process.env.NODE_ENV !== 'development') {
   ga4.initialize('G-3TQRG02P4B')
-  ga4.send('pageview')
+  ga4.send({ hitType: 'pageview', path: '/replay' })
 }
 
 function parseLog(log) {

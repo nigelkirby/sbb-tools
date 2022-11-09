@@ -1,5 +1,5 @@
-// import { Link } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import ga4 from 'react-ga4'
 import {
   Row,
   Col,
@@ -9,6 +9,11 @@ import {
   CardBody,
   CardText,
 } from 'reactstrap'
+
+if (process.env.NODE_ENV !== 'development') {
+  ga4.initialize('G-3TQRG02P4B')
+  ga4.send({ hitType: 'pageview', path: '/tourney' })
+}
 
 export default function LandingPage() {
   return (
