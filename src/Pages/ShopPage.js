@@ -32,7 +32,7 @@ function calcProb(prob, n) {
 
 let g
 
-function App() {
+function ShopPage() {
   const [level, updateLevel] = useState(2)
   const [handSize, updateHandSize] = useState(3)
   const [hand, updateHand] = useState([])
@@ -401,4 +401,4 @@ function App() {
   )
 }
 
-export default App
+export default ShopPage

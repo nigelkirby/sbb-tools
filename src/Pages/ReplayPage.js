@@ -151,7 +151,7 @@ function prepBoard({ characters, spells, hero, treasures, ...restBoard }) {
   }
 }
 
-function App() {
+function ReplayPage() {
   const [activeIndex, updateActiveIndex] = useState(0)
   const [game, updateGame] = useState(undefined)
   const [rawLog, updateRawLog] = useState('')
@@ -327,4 +327,4 @@ function App() {
   )
 }
 
-export default App
+export default ReplayPage

@@ -1,5 +1,3 @@
-import chars from '../chars.json'
-// import { useState } from 'react'
 import { simulateCutoff } from '../functions/tourney'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-widgets/styles.css'
@@ -35,7 +33,7 @@ function getPercentile(data, percentile) {
   return values[index]
 }
 
-function App() {
+function TourneyPage() {
   const [cutoff, updateCutoff] = useState(8)
   const [rounds, updateRounds] = useState(7)
   const [playerCount, updatePlayerCount] = useState(100)
@@ -85,69 +83,6 @@ function App() {
           <Card color="light">
             <CardBody>
               <Form>
-                {/*  <FormGroup row>
-                  <Label for="shopTier" sm={6}>
-                    Shop Tier
-                  </Label>
-                  <Col sm={6}>
-                    <Input
-                      type="select"
-                      id="shopTier"
-                      onChange={(e) => updateLevel(e.target.value)}
-                    >
-                      {[2, 3, 4, 5, 6].map((n) => (
-                        <option value={n} key={n}>
-                          {n}
-                        </option>
-                      ))}
-                    </Input>
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="handSize" sm={6}>
-                    Amount to Draw
-                  </Label>
-                  <Col sm={6}>
-                    <Input
-                      type="select"
-                      defaultValue={handSize}
-                      id="handSize"
-                      onChange={(e) =>
-                        updateHandSize(Number.parseInt(e.target.value, 10))
-                      }
-                    >
-                      {[0, 1, 2, 3, 4, 5].map((n) => (
-                        <option value={n} key={n}>
-                          {n}
-                        </option>
-                      ))}
-                    </Input>
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="piperMode" sm={6}>
-                    Piper Mode
-                  </Label>
-                  <Col sm={6}>
-                    <Input
-                      type="checkbox"
-                      id="piperMode"
-                      onClick={() => updatePiper(!piper) && updatePans(false)}
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="pansMode" sm={6}>
-                    Pans Shadow Mode
-                  </Label>
-                  <Col sm={6}>
-                    <Input
-                      type="checkbox"
-                      id="pansMode"
-                      onClick={() => updatePans(!pans) && updatePiper(false)}
-                    />
-                  </Col>
-                </FormGroup> */}
                 <FormGroup row>
                   <Label for="cutoff" sm={6}>
                     Target Cutoff
@@ -304,4 +239,4 @@ function App() {
   )
 }
 
-export default App
+export default TourneyPage
