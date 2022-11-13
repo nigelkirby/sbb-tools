@@ -7,6 +7,7 @@ import Navigation from './Components/Navigation'
 import TourneyPage from './Pages/TourneyPage'
 import LandingPage from './Pages/LandingPage'
 import ReplayPage from './Pages/ReplayPage'
+import DragPage from './Pages/DragPage'
 // import BattleSimPage from './BattleSimPage'
 
 function App() {
@@ -40,15 +41,15 @@ function App() {
             </>
           }
         /> */}
-        {/* <Route
-          path="/stag"
+        <Route
+          path="/drag"
           element={
             <>
               <Navigation />
-              <StagPage />
+              <DragPage slotStart={2} />
             </>
           }
-        /> */}
+        />
         <Route
           path="/tourney"
           element={

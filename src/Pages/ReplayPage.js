@@ -22,7 +22,8 @@ import {
 } from '../cards/index'
 
 import { useState, useEffect } from 'react'
-import CharacterBoard from '../CharacterBoard'
+import CharacterBoard from '../Components/CharacterBoard'
+import Treasures from '../Components/Treasures'
 
 if (process.env.NODE_ENV !== 'development') {
   ga4.initialize('G-3TQRG02P4B')
@@ -89,7 +90,7 @@ function Percent({ a, b }) {
   return <>{Number.parseFloat((a / b) * 100).toFixed(2)}%</>
 }
 
-function SimStats({ us, results }) {
+function SimStats({ us, results, cb }) {
   const p = results.map(({ ties = 0, ...heroes }) => {
     const { [us]: wins, ...other } = heroes
     const losses = Object.values(other)[0]?.wins || 0
@@ -121,9 +122,11 @@ function SimStats({ us, results }) {
         </li>
         {p.map((t, i) => (
           <li>
-            run {i + 1}: ties: <Percent a={t.ties} b={t.total} /> wins:{' '}
-            <Percent a={t.wins} b={t.total} /> losses:{' '}
-            <Percent a={t.losses} b={t.total} />
+            <a onClick={() => cb(results[i].activeBoard)}>
+              run {i + 1}: ties: <Percent a={t.ties} b={t.total} /> wins:{' '}
+              <Percent a={t.wins} b={t.total} /> losses:{' '}
+              <Percent a={t.losses} b={t.total} />
+            </a>
           </li>
         ))}
       </ul>
@@ -165,7 +168,6 @@ function ReplayPage() {
         return [player, prepBoard(board)]
       })
       .reduce((acc, [player, board]) => ({ ...acc, [player]: board }), {})
-    console.log(a)
     const response = await fetch('http://localhost:8000/sim', {
       method: 'POST',
       mode: 'cors',
@@ -219,12 +221,40 @@ function ReplayPage() {
         <Row>
           <Col md={6}>
             <Row>
+              <Col md={6}>
+                <Row>
+                  <Treasures
+                    treasures={Object.values(activeBoard)[0].treasures}
+                  />
+                </Row>
+              </Col>
+              <Col md={6}>
+                <Row>
+                  <Treasures treasures={Object.values(activeBoard)[0].spells} />
+                </Row>
+              </Col>
+            </Row>
+            <Row>
               <CharacterBoard
                 characters={Object.values(activeBoard)[0].characters}
               />
             </Row>
           </Col>
           <Col md={6}>
+            <Row>
+              <Col md={6}>
+                <Row>
+                  <Treasures
+                    treasures={Object.values(activeBoard)[1].treasures}
+                  />
+                </Row>
+              </Col>
+              <Col md={6}>
+                <Row>
+                  <Treasures treasures={Object.values(activeBoard)[1].spells} />
+                </Row>
+              </Col>
+            </Row>
             <Row>
               <CharacterBoard
                 characters={Object.values(activeBoard)[1].characters}
@@ -238,7 +268,7 @@ function ReplayPage() {
             <Button
               onClick={() =>
                 getSim(activeBoard).then((result) =>
-                  updateSimResults([...simResults, result]),
+                  updateSimResults([...simResults, { ...result, activeBoard }]),
                 )
               }
             >
@@ -249,7 +279,11 @@ function ReplayPage() {
             </Button>
           </Col>
           <Col>
-            <SimStats us={game.hero} results={simResults} />
+            <SimStats
+              us={game.hero}
+              results={simResults}
+              cb={updateActiveBoard}
+            />
           </Col>
           <Col>
             <Input

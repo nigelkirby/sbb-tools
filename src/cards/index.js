@@ -426,7 +426,7 @@ export const characters = {
     defense: 10,
   },
   SBB_CHARACTER_MONSTERLORD: { name: `Oni Tyrant`, attack: 13, defense: 13 },
-  SPK_CHARACTER_PRINCESSPEA: { name: `Princess Pea`, attack: 10, defense: 10 },
+  SPK_CHARACTER_PRINCESSPEA: { name: `Empress Pea`, attack: 10, defense: 10 },
 }
 
 function invert(cards) {

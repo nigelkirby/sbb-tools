@@ -8,7 +8,8 @@ import {
   Row,
 } from 'reactstrap'
 import CharCard from './CharCard'
-import CharacterBoard from '../CharacterBoard'
+import CharacterBoard from './CharacterBoard'
+import Treasures from './Treasures'
 
 export default function Board({ details }) {
   return (
@@ -43,18 +44,7 @@ export default function Board({ details }) {
             Treasures:
             <Container>
               <Row>
-                {details.treasures.map((t) => (
-                  <Col md={4}>
-                    <Card>
-                      <img
-                        src={`${process.env.PUBLIC_URL}/cards/${t
-                          .replace(',', '')
-                          .replace("'", '')}.png`}
-                        alt={t}
-                      />
-                    </Card>
-                  </Col>
-                ))}
+                <Treasures treasures={details.treasures} />
               </Row>
             </Container>
           </Col>
@@ -62,19 +52,7 @@ export default function Board({ details }) {
             Spells:
             <Container>
               <Row>
-                {details.spells.map((t) => (
-                  <Col md={4}>
-                    <Card>
-                      <img
-                        src={`${process.env.PUBLIC_URL}/cards/${t
-                          .replace(',', '')
-                          .replace('!', '')
-                          .replace("'", '')}.png`}
-                        alt={t}
-                      />
-                    </Card>
-                  </Col>
-                ))}
+                <Treasures treasures={details.spells} />
               </Row>
             </Container>
           </Col>
