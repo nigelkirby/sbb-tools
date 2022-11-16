@@ -24,6 +24,7 @@ import {
 import { useState, useEffect } from 'react'
 import CharacterBoard from '../Components/CharacterBoard'
 import Treasures from '../Components/Treasures'
+import { Link } from 'react-router-dom'
 
 if (process.env.NODE_ENV !== 'development') {
   ga4.initialize('G-3TQRG02P4B')
@@ -122,11 +123,11 @@ function SimStats({ us, results, cb }) {
         </li>
         {p.map((t, i) => (
           <li>
-            <a onClick={() => cb(results[i].activeBoard)}>
+            <Button onClick={() => cb(results[i].activeBoard)}>
               run {i + 1}: ties: <Percent a={t.ties} b={t.total} /> wins:{' '}
               <Percent a={t.wins} b={t.total} /> losses:{' '}
               <Percent a={t.losses} b={t.total} />
-            </a>
+            </Button>
           </li>
         ))}
       </ul>
@@ -144,7 +145,6 @@ function prepBoard({ characters, spells, hero, treasures, ...restBoard }) {
   }))
   const transformedSpells = spells.map((s) => spellsIDMap[s])
   const transformedTreasures = treasures.map((t) => treasureIDMap[t])
-  console.log(hero, heroIDMap[hero])
   return {
     characters: transformedChars,
     spells: transformedSpells,
@@ -318,14 +318,19 @@ function ReplayPage() {
                     </Button>
                   ))}
               </ButtonGroup>
-              <Button
-                onClick={() => {
-                  updateSimResults([])
-                  updateActiveBoard(game._log['combat-info'][activeIndex])
+              <Link
+                to={{
+                  pathname: '/drag',
+                  // state: ,
+                  state: { a: 1 },
+                }}
+                state={{
+                  board: game._log['combat-info'][activeIndex],
+                  hero: game.hero,
                 }}
               >
                 Inspect
-              </Button>
+              </Link>
             </div>
           </Col>
         </Row>

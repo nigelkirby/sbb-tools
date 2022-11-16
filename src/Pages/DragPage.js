@@ -24,6 +24,7 @@ import {
   heroIDMap,
   treasureIDMap,
 } from '../cards/index'
+import { useLocation } from 'react-router-dom'
 
 if (process.env.NODE_ENV !== 'development') {
   ga4.initialize('G-3TQRG02P4B')
@@ -203,7 +204,8 @@ function SimStats({ us, results, cb }) {
         </li>
         {p.map((t, i) => (
           <li>
-            <a
+            <Button
+              color="none"
               onClick={() =>
                 cb({
                   type: actionTypes.set,
@@ -214,7 +216,7 @@ function SimStats({ us, results, cb }) {
               run {i + 1}: ties: <Percent a={t.ties} b={t.total} /> wins:{' '}
               <Percent a={t.wins} b={t.total} /> losses:{' '}
               <Percent a={t.losses} b={t.total} />
-            </a>
+            </Button>
           </li>
         ))}
       </ul>
@@ -228,159 +230,20 @@ function SimStats({ us, results, cb }) {
 //TODO: select spells
 //TODO: add hand
 //TODO: sim stats
-const initialState = {
-  villian: {
-    characters: [
-      {
-        id: 'RainbowUnicorn',
-        attack: 4,
-        health: 13,
-        golden: false,
-        cost: 2,
-        position: 3,
-        tribes: ['good', 'animal'],
-        quest_counter: -1,
-      },
-      {
-        id: 'TheWhiteStag',
-        attack: 6,
-        health: 8,
-        golden: false,
-        cost: 3,
-        position: 2,
-        tribes: ['good', 'animal'],
-        quest_counter: -1,
-      },
-      {
-        id: 'MadMim',
-        attack: 0,
-        health: 3,
-        golden: false,
-        cost: 2,
-        position: 5,
-        tribes: ['evil', 'mage'],
-        quest_counter: -1,
-      },
-      {
-        id: 'GoodWitchoftheNorth',
-        attack: 2,
-        health: 4,
-        golden: false,
-        cost: 3,
-        position: 7,
-        tribes: ['good', 'mage'],
-        quest_counter: -1,
-      },
-      {
-        id: 'BlackCat',
-        attack: 4,
-        health: 10,
-        golden: false,
-        cost: 2,
-        position: 4,
-        tribes: ['good', 'animal'],
-        quest_counter: -1,
-      },
-      {
-        id: 'Polywoggle',
-        attack: 5,
-        health: 2,
-        golden: false,
-        cost: 2,
-        position: 1,
-        tribes: ['animal'],
-        quest_counter: -1,
-      },
-      {
-        id: 'LadyoftheLake',
-        attack: 2,
-        health: 3,
-        golden: false,
-        cost: 4,
-        position: 6,
-        tribes: ['good', 'mage'],
-        quest_counter: -1,
-      },
-    ],
-    treasures: [],
-    hero: 'PiedPiper',
-    spells: ["Beauty'sInfluence"],
-    level: 0,
-    hand: [],
-  },
-  hero: {
-    characters: [
-      {
-        id: 'Polywoggle',
-        attack: 2,
-        health: 2,
-        golden: false,
-        cost: 2,
-        position: 5,
-        tribes: ['animal'],
-        quest_counter: -1,
-      },
-      {
-        id: 'MadMim',
-        attack: 2,
-        health: 3,
-        golden: false,
-        cost: 2,
-        position: 6,
-        tribes: ['evil', 'mage'],
-        quest_counter: -1,
-      },
-      {
-        id: 'LabyrinthMinotaur',
-        attack: 12,
-        health: 4,
-        golden: true,
-        cost: 2,
-        position: 4,
-        tribes: ['evil', 'monster'],
-        quest_counter: -1,
-      },
-      {
-        id: 'Crafty',
-        attack: 9,
-        health: 6,
-        golden: false,
-        cost: 2,
-        position: 3,
-        tribes: ['dwarf'],
-        quest_counter: -1,
-      },
-      {
-        id: 'TheWhiteStag',
-        attack: 5,
-        health: 5,
-        golden: false,
-        cost: 3,
-        position: 1,
-        tribes: ['good', 'animal'],
-        quest_counter: -1,
-      },
-      {
-        id: 'SherwoodSureshot',
-        attack: 7,
-        health: 3,
-        golden: false,
-        cost: 2,
-        position: 2,
-        tribes: ['good', 'royal'],
-        quest_counter: -1,
-      },
-    ],
-    treasures: ['FairyTail'],
-    hero: 'ZippeetheZombee',
-    spells: ['ShrinkRay'],
-    level: 0,
-    hand: [],
-  },
-  round: 5,
+function normalizePlayerNames({ hero, board }) {
+  const { round, ...restBoard } = board
+  const destructured = Object.entries(restBoard)
+  return {
+    hero: destructured.find(([player]) => player === hero)[1],
+    villian: destructured.find(([player]) => player !== hero)[1],
+    round,
+  }
 }
 function DragPage() {
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducer(
+    reducer,
+    normalizePlayerNames(useLocation().state),
+  )
 
   const [hero, updateHero] = useState(true)
   const [position, updatePosition] = useState(1)
@@ -578,6 +441,7 @@ function DragPage() {
           <Col md={4}>
             <Button
               onClick={() =>
+                true ||
                 getSim(state).then((result) =>
                   updateSimResults([
                     ...simResults,
@@ -586,7 +450,7 @@ function DragPage() {
                 )
               }
             >
-              simulate
+              simulate (not implemented)
             </Button>
             <SimStats us={'hero'} results={simResults} cb={dispatch} />
           </Col>
